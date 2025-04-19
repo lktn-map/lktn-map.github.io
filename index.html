@@ -646,8 +646,6 @@ function setupMap() {
       setupRemoveButton();
       updateUncoloredRegionsList();
     }
-  
-    init();
 
     document.getElementById('save-png-button').addEventListener('click', function() {
         const svg = document.getElementById("innermap");
@@ -1094,10 +1092,14 @@ function updateMode(value) {
 
 document.getElementById('mode-select').addEventListener('change', e => {
   updateMode(e.target.value);
+    setupMap();
+  updateLegend();
+  updateUncoloredRegionsList();
 });
 
 // Optional: initialize with default
-updateMode('a');
+updateMode('b');
+    init();
   </script>
 </body>
 </html>
