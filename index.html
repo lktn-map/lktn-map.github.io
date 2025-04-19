@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LKTN-β</title>
+  <title>LKTN by 삼쩌모</title>
   <style>
     * {
       box-sizing: border-box;
@@ -278,10 +278,11 @@
 <body>
     <header id="topbar">
         <div class="topbar-left">
-          <a class="logo" style="font-weight: 700; font-size: 24px;">LKTN-β</a>
+          <a class="logo" style="font-weight: 700; font-size: 24px;">LKTN</a>
+          <a href="https://halv.kr/">by 삼쩌모</a>
         </div>
         <nav class="topbar-links">
-          <a href="https://w.halv.kr/">위키(β)</a>
+          <a href="https://w.halv.kr/">쩌모위키</a>
         </nav>
         <div class="mode-switch">
           <select id="mode-select">
@@ -503,7 +504,7 @@ function setupMap() {
         updateUncoloredRegionsList();
       } else {
         // remove fill
-        region.style.fill = '#b9b9b9';
+        region.style.fill = null;
         region.removeAttribute('data-party');
         region.removeAttribute('data-level');
         updateUncoloredRegionsList();
@@ -572,7 +573,7 @@ function setupMap() {
     document.querySelectorAll('#regions path, #regions polygon, #regions polyline').forEach(region => {
         region.addEventListener('click', () => {
         if (selectedParty === null && selectedLevel === null) {
-            region.style.fill = '#b9b9b9';
+            region.style.fill = null;
             region.removeAttribute('data-party');
             region.removeAttribute('data-level');
             updateUncoloredRegionsList();
