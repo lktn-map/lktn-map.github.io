@@ -7,6 +7,8 @@
   <style>
     * {
       box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     @keyframes region-pulse {
@@ -341,7 +343,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 6px 10px;
-  font-size: 15px;
+  font-size: 14px;
   outline: none;
   appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14l-4.796-5.481c-.566-.648-.106-1.659.753-1.659h9.592c.86 0 1.32 1.01.753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
@@ -350,6 +352,15 @@
   background-size: 15px;
   padding-right: 30px;
   transition: border 0.2s ease;
+  font-family: 'Pretendard', sans-serif;
+}
+
+#toolbar-inside-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
 }
 
 #topbar select:hover,
@@ -357,75 +368,151 @@
   border-color: #007acc;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   #topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
-    width: auto;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
   }
 
-  .mode-switch {
+  #map-container {
     width: 100%;
-    margin-top: 10px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   #toolbar-wrapper {
     width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    max-width: 900px;
+    position: sticky;
+    top: 75px;
+    z-index: 60000;
+    background: #fffc;
+    border-radius: 12px;
+    padding: 5px;
+    margin-top: -5px;
+    margin-bottom: 15px;
   }
 
   #toolbar {
-    width: 100%;
-    margin: 10px 0;
+    margin: 0 8px;
   }
 
   .scroll-button {
     display: none; /* hide arrow buttons on mobile */
   }
-  #map-container {
-    max-width: 100%;
-    padding: 0 10px;
-  }
 
   #map {
     width: 100%;
+    max-width: 900px;
     padding-left: 0;
+    padding-bottom: 4vw;
+    padding-right: 1vw;
   }
 
+  #remove-color:hover {
+        border-color: #000;
+        box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.4);
+        transform: scale(1.05);
+    }
+
   #legend {
-    position: static;
-    width: auto;
-    max-height: none;
-    margin-top: 10px;
+    display: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
   #uncolored-regions-list {
-    padding: 15px;
-    width: auto;
+    width: 100% !important;
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;         /* allow wrapping */
+    overflow-x: visible;     /* no horizontal scroll needed */
+    padding: 13px 30px 25px !important;
   }
 
-  body {
-  font-size: clamp(13px, 2vw, 16px);
+  h2 {
+    padding-left: 5px;
+  }
+
+  #scroll-left, #scroll-right {
+    display: none !important; /* hide scroll buttons on mobile */
+  }
+
 }
 
-.party-selector input[type="color"],
-.color-swatch,
-#remove-color,
-#save-png-button {
-  width: 44px;
-  height: 44px;
+@media (max-width: 750px) {
+  #remove-color {
+    margin-right: 7px;
+  }
+
+  #save-png-button {
+    margin-right: 7px;
+  }
 }
+
+@media (max-width: 480px) {
+  .topbar-links {
+    display: none;
+  }
+
+  #topbar {
+    padding: 15px 18px;
+  }
+}
+ 
+@media (max-width: 400px) {
+  #maker {
+    display: block;
+  }
+
+  #toolbar-wrapper {
+    top: 90px;
+  }
+
 }
 
   </style>
 </head>
 <body>
+  <div id="tutorial-overlay" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  z-index: 99999;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+">
+  <div style="max-width: 500px;">
+    <h1 style="font-size: 24px; margin-bottom: 20px;">LKTN<span style="font-size: 0.8em; font-weight: 400;">(v1.5.0)</span> 사용 안내</h1>
+    <p style="font-size: 16px; margin-bottom: 16px;">정당 색상을 선택해 지도나 하단 목록을 클릭해 보세요.<br />모바일에서는 색상 목록을 스크롤할 수 있습니다.<br />색상 제거 버튼을 길게 누르거나<br/>Shift와 함께 누르면 전체 초기화됩니다.</p>
+    <p style="font-size: 15px; opacity: 0.7;">처음 한 번만 표시됩니다.</p>
+    <button id="tutorial-close" style="
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #00c690;
+      color: white;
+      cursor: pointer;
+    ">시작하기</button>
+  </div>
+</div>
+
+
     <header id="topbar">
         <div class="topbar-left">
           <a class="logo" style="font-weight: 700; font-size: 24px;">LKTN</a>
-          <a href="https://halv.kr/">by 삼쩌모</a>
+          <a id="maker" href="https://twitter.com/halvfjerde">by 삼쩌모</a>
         </div>
         <nav class="topbar-links">
           <a href="https://w.halv.kr/">쩌모위키</a>
@@ -453,7 +540,7 @@
     z-index: 1000;
   "></div>
 
-  <div id="toolbar-wrapper">
+  <div id="toolbar-wrapper"> <div id="toolbar-inside-wrapper">
   <button id="remove-color"
     style="padding: 10px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" viewBox="0 0 24 24">
@@ -490,7 +577,7 @@
       <path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
-</div>
+</div> </div>
 
   <div id="map-container">
     <svg id="map" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
@@ -532,12 +619,12 @@
       { id: 'party2', name: '국민의힘', base: '#E61E2B', levels: [] },
       { id: 'party3', name: '개혁신당', base: '#FF7210', levels: [] },
       { id: 'party4', name: '진보당', base: '#d60072', levels: [] },
-      { id: 'party5', name: '정의당', base: '#f6b93b', levels: [] },
-      { id: 'party6', name: '녹색당', base: '#22AC38', levels: [] },
+      { id: 'party5', name: '민주노동당', base: '#f6b93b', levels: [] },
       { id: 'party7', name: '새미래민주당', base: '#59afb5', levels: [] },
       { id: 'party8', name: '기본소득당', base: '#00D2C3', levels: [] },
       { id: 'party9', name: '조국혁신당', base: '#2188bf', levels: [] },
       { id: 'party10', name: '자유통일당', base: '#4371a3', levels: [] },
+      { id: 'party11', name: '무소속', base: '#808080', levels: [] },
     ];
   
     function generateShades(baseColor, options = {}) {
@@ -830,28 +917,58 @@ function updateLegend() {
 
 function setupRemoveButton() {
   const removeBtn = document.getElementById('remove-color');
+  let pressTimer = null;
 
+  removeBtn.addEventListener('mousedown', startPress);
+  removeBtn.addEventListener('touchstart', startPress);
+  removeBtn.addEventListener('mouseup', cancelPress);
+  removeBtn.addEventListener('mouseleave', cancelPress);
+  removeBtn.addEventListener('touchend', cancelPress);
+  removeBtn.addEventListener('touchcancel', cancelPress);
+
+  function startPress(e) {
+    // prevent accidental triggers
+    if (pressTimer === null) {
+      pressTimer = setTimeout(() => {
+        const confirmReset = confirm('모든 색상을 제거하시겠습니까?');
+        if (confirmReset) {
+          document.querySelectorAll('#regions path, #regions polygon, #regions polyline, #regions rect').forEach(region => {
+            region.style.fill = null;
+            region.removeAttribute('data-party');
+            region.removeAttribute('data-level');
+          });
+          updateLegend();
+          updateRegionList();
+          updateURLState();
+        }
+      }, 1000); // Long press = 700ms
+    }
+  }
+
+  function cancelPress() {
+    if (pressTimer !== null) {
+      clearTimeout(pressTimer);
+      pressTimer = null;
+    }
+  }
+
+  // Regular tap = toggle remove mode
   removeBtn.addEventListener('click', (e) => {
-    if (e.shiftKey) {
-      // SHIFT + click = Reset all
-      document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)').forEach(region => {
-        region.style.fill = null;
-        region.removeAttribute('data-party');
-        region.removeAttribute('data-level');
-      });
+    // Prevent conflict with long press
+    if (pressTimer !== null) {
+      clearTimeout(pressTimer);
+      pressTimer = null;
+    }
 
-      updateRegionList();
-      updateLegend();
-      updateURLState();
-    } else {
-      // Regular click = Deselect only
+    const isActive = removeBtn.classList.toggle('selected');
+    if (isActive) {
       selectedParty = null;
       selectedLevel = null;
-      removeBtn.classList.add('selected');
       document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
     }
   });
 }
+
   
 function updateRegionList() {
   const listContainer = document.getElementById('uncolored-regions');
@@ -1801,6 +1918,21 @@ function updateMode(value) {
   modeContainer.innerHTML = (modeContent[value]());
 }
 
+function maybeShowTutorial() {
+  const shownBefore = localStorage.getItem('lktn_tutorial_shown');
+  if (!shownBefore) {
+    document.getElementById('tutorial-overlay').style.display = 'flex';
+  }
+
+  document.getElementById('tutorial-close').addEventListener('click', () => {
+    localStorage.setItem('lktn_tutorial_shown', 'true');
+    document.getElementById('tutorial-overlay').style.opacity = '0';
+    setTimeout(() => {
+      document.getElementById('tutorial-overlay').style.display = 'none';
+    }, 500);
+  });
+}
+
 
 function updateURLState() {
   const colored = regionList.map((el, i) => {
@@ -1888,6 +2020,7 @@ document.getElementById('mode-select').addEventListener('change', e => {
     loadURLState();
     updateLegend();
     updateRegionList();
+    maybeShowTutorial();
   </script>
 </body>
 </html>
