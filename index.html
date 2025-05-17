@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>종합정치정보플랫폼 LKTN</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+
+    @font-face {
+        font-family: 'Pretendard';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: #f9fafe;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-top: 25px;
+      margin-bottom: 0px;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 40px;
+      text-align: center;
+      color: #666;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    #topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  position: sticky;
+  top: 8px;
+  z-index: 3000;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#topbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+#topbar a:hover {
+  color: #007acc;
+}
+
+        #topbar select {
+  background-color: #f0f4f8;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14l-4.796-5.481c-.566-.648-.106-1.659.753-1.659h9.592c.86 0 1.32 1.01.753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  padding-right: 30px;
+  transition: border 0.2s ease;
+  font-family: 'Pretendard', sans-serif;
+}
+
+
+#topbar select:hover,
+#topbar select:focus {
+  border-color: #007acc;
+}
+
+
+@media (max-width: 1000px) {
+  #topbar {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+  }
+}
+
+    @media (max-width: 480px) {
+  .topbar-links {
+    display: none;
+  }
+
+  #topbar {
+    padding: 15px 18px;
+  }
+}
+ 
+@media (max-width: 400px) {
+  #maker {
+    display: block;
+  }
+
+  #toolbar-wrapper {
+    top: 90px;
+  }
+}
+  </style>
+</head>
+<body>
+     <header id="topbar">
+        <div class="topbar-left">
+          <img class="logo" style="width:45px;" src="/icon.png"></img>
+        </div>
+        <nav class="topbar-links">
+        <a href="/map">지도</a>
+        </nav>
+        <div class="mode-switch">
+          <select id="mode-select" onclick="window.open(value,'_blank');">
+            <option value="https://x.com/lktn_kr">트위터　　　</option>
+          </select>
+        </div>
+      </header>
+
+  <h1>종합정치정보플랫폼 LKTN</h1>
+  <p>지도로 보는 선거, 나의 정치 성향 테스트, 정치인·정당 정보까지 한곳에!</p>
+
+  <div class="menu-grid">
+    <a href="/map" class="card">
+      <div class="card-icon">🗺️</div>
+      <div class="card-title">지도 색칠하기</div>
+      <div class="card-desc">선거 지도를 직접 색칠하며 나만의 분석을 해보세요.</div>
+    </a>
+    <a href="" class="card">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">정치 성향 테스트</div>
+      <div class="card-desc">COMING SOON</div>
+    </a>
+    <a href="" class="card">
+      <div class="card-icon">👤</div>
+      <div class="card-title">정당인 정보</div>
+      <div class="card-desc">COMING SOON</div>
+    </a>
+    <a href="" class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-title">정당 비교</div>
+      <div class="card-desc">COMING SOON</div>
+    </a>
+  </div>
+
+</body>
+</html>
