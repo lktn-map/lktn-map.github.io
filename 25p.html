@@ -35,6 +35,25 @@
   }
 }
 
+#topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: 17px;
+  position: sticky;
+  top: 20px;
+  z-index: 3000;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+}
+
 #topbar a {
   text-decoration: none;
   color: #333;
@@ -46,7 +65,25 @@
   color: #007acc;
 }
 
-        #topbar select {
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#mode-select {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+    #topbar select {
   background-color: #f0f4f8;
   color: #333;
   border: 1px solid #ccc;
@@ -62,38 +99,6 @@
   padding-right: 30px;
   transition: border 0.2s ease;
   font-family: 'Pretendard', sans-serif;
-}
-
-
-#topbar select:hover,
-#topbar select:focus {
-  border-color: #007acc;
-}
-
-#mode-select {
-  padding: 5px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-
-    #topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ffffff;
-  padding: 15px 25px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  font-size: 17px;
-  position: sticky;
-  top: 8px;
-  z-index: 3000;
-  width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -20px;
 }
 
     @font-face {
@@ -179,19 +184,20 @@ tr:last-child td{border-bottom:none;}
 </style>
 </head>
 <body>
-<header id="topbar">
+
+    <header id="topbar">
         <div class="topbar-left">
-          <img class="logo" style="width:45px;" src="/icon.png"></img>
+          <a href="/" style="margin: 0;"><img class="logo" style="width:45px;" src="/icon.png"></img></a>
         </div>
         <nav class="topbar-links">
-        <a href="/map">지도</a>
-        <a href="/25p">25대선</a>
+          <a href="/map">지도</a>
+          <a href="/25p">25대선</a>
         </nav>
         <div class="mode-switch">
-          <select id="mode-select" onchange="window.open(value,'_blank');">
-            <option value="https://lktn.kr/">링크　　　　</option>
-            <option value="https://x.com/lktn_kr">𝕏 트위터</option>
-            <option value="https://buymeacoffee.com/lktn">☕️ 후원하기</option>
+          <select id="mode-select">
+            <option value="a">시군구</option>
+            <option value="b">광역자치단체</option>
+            <option value="c">국회의원</option>
           </select>
         </div>
       </header>
