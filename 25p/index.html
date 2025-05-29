@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>종합정치정보플랫폼 LKTN</title>
+  <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5250511666085861"
+     crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1MMHP5CZBK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1MMHP5CZBK');
+</script>
+<meta name="naver-site-verification" content="b36ea91b8963f7747309d0e49077c452494afedc" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+@font-face {
+    font-family: 'Shilla_CultureB-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/Shilla_CultureB-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arita-buri-SemiBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-buri-SemiBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+    @font-face {
+        font-family: 'Pretendard';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+
+
+
+@font-face {
+    font-family: 'OAGothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'OAGothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PTBandoche';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/PTBandocheB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PTBandoche';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/PTBandoche.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+    body {
+      margin: 0;
+      font-family: 'OAGothic', sans-serif;
+      background-color: #f9fafe;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-top: 25px;
+      margin-bottom: -3px;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 40px;
+      text-align: center;
+      color: #666;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    #topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: 17px;
+  position: sticky;
+  top: 8px;
+  z-index: 3000;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+}
+
+.banner {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#topbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+#topbar a:hover {
+  color: #007acc;
+}
+
+        #topbar select {
+  background-color: #f0f4f8;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14l-4.796-5.481c-.566-.648-.106-1.659.753-1.659h9.592c.86 0 1.32 1.01.753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  padding-right: 30px;
+  transition: border 0.2s ease;
+  font-family: 'Pretendard', sans-serif;
+}
+
+
+#topbar select:hover,
+#topbar select:focus {
+  border-color: #007acc;
+}
+
+#mode-select {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+
+@media (max-width: 1000px) {
+  #topbar {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+  }
+
+  .banner {
+    width: 100%;
+    max-width: 900px;
+  }
+}
+
+    @media (max-width: 480px) {
+  .topbar-links {
+    display: none;
+  }
+
+  #topbar {
+    padding: 15px 18px;
+  }
+}
+ 
+@media (max-width: 400px) {
+  #maker {
+    display: block;
+  }
+
+  #toolbar-wrapper {
+    top: 90px;
+  }
+}
+  </style>
+</head>
+<body>
+     <header id="topbar">
+        <div class="topbar-left">
+          <img class="logo" style="width:45px;" src="/icon.png"></img>
+        </div>
+        <nav class="topbar-links">
+        <a href="/map">지도</a>
+        <a href="/25p">25대선</a>
+        </nav>
+        <div class="mode-switch">
+          <select id="mode-select" onchange="window.open(value,'_blank');">
+            <option value="https://lktn.kr/">링크　　　　</option>
+            <option value="https://x.com/lktn_kr">𝕏 트위터</option>
+            <option value="https://buymeacoffee.com/lktn">☕️ 후원하기</option>
+          </select>
+        </div>
+      </header>
+    </div>
+    <style>
+        .post {
+            background: #f4f4f4;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .post-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
+        .loading {
+            text-align: center;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        .error {
+            color: #e74c3c;
+            padding: 10px;
+            background: #fadbd8;
+            border-radius: 5px;
+        }
+
+        .carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 4px 30px rgba(55, 55, 55, 0.2);
+  border: 2px solid rgba(212, 212, 212, 0.5);
+  border-radius: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  gap: 16px;
+  padding: 0px;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.carousel-track::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+
+.carousel-slide {
+  max-width: 450px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  background-size: cover;
+  background-position: center;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.vote-rate-overlay {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  text-align: center;
+  /* From https://css.glass */
+background: rgba(40, 40, 40, 0.35);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+border: 2px solid rgba(40, 40, 40, 0.3);
+  color: rgb(238, 237, 233);
+  font-size: 3.5rem;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.7);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+.vote-decimal {
+  font-size: 0.7em;
+  font-weight: normal;
+}
+
+.vote-title {
+  font-size: 0.37em;
+  font-weight: normal;
+  display: block;
+  margin-bottom: -78px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .vote-title {
+  font-size: 0.37em;
+  font-weight: normal;
+  display: block;
+  margin-bottom: -75px;
+  margin-top: 8px;
+}
+.vote-rate-overlay {
+  font-size: 3.4rem;
+}
+}
+
+@media screen and (max-width: 440px) {
+  .vote-title {
+  font-size: 0.37em;
+  font-weight: normal;
+  display: block;
+  margin-bottom: -66px;
+  margin-top: 8px;
+}
+.vote-rate-overlay {
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  font-size: 3rem;
+}
+}
+    </style>
+    <div class="carousel-container">
+  <div id="carousel" class="carousel-track" style="max-width: 450px;
+  width: 100%; aspect-ratio : 450 / 533;"></div>
+</div>
+
+    <script>
+        // CORS 허용 사이트 예제 (JSONPlaceholder)
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('data-container');
+            
+           fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://vote2025.imbc.com/PreVote/Region?d=202506010326')}`)
+.then(response => response.json())
+  .then(data => {
+    const parsedData = JSON.parse(data.contents);
+    const voteList = parsedData.PreVoteInfoList;
+
+    const carousel = document.getElementById('carousel');
+    
+    voteList
+    .forEach(region => {
+      const regionName = region.REGEION_NAME_B;
+      const voteRate = region.REGEION_VOTE_RATE;
+
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+      slide.style.backgroundImage = `url('./${regionName}.png')`; // 지역 이름에 따라 이미지 선택
+
+      const [intPart, decimalPart] = voteRate.toFixed(2).split('.');
+
+const overlay = document.createElement('div');
+overlay.className = 'vote-rate-overlay';
+overlay.innerHTML = `<span class="vote-title">이 시각 사전투표율</span><br>
+  <span class="vote-int">${intPart}</span><span class="vote-decimal">.${decimalPart}</span>
+`;
+
+      slide.appendChild(overlay);
+      carousel.appendChild(slide);
+    });
+
+    // 캐러셀 작동
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentIndex = 0;
+  });
+        });
+    </script>
+</body>
+</html>
