@@ -528,7 +528,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   const sidoCount = 17; // 시도 번호 1~17
   const apiBase = 'https://vote2022.imbc.com/Api/HuboListGPCG';
 
-  for (let sido = 1; sido <= sidoCount; sido++) {
+  for (let sido = 0; sido <= sidoCount; sido++) {
     try {
       const url = `${apiBase}?sido=${sido}&sungeo=undefined&isPoll=N&d=202505302020`;
       const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
@@ -699,7 +699,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
           .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            const state = doc.querySelector('#thread-14 .main table tbody tr td span a.thread-14').textContent[sido - 1];
+            const state = doc.querySelector('#thread-14 .main table tbody tr td span a.thread-14').textContent[sido];
             statusIcon.src = `../25p-beta/${state}.png`;
 
             if (state === 'C') {
@@ -731,17 +731,14 @@ border: 2px solid rgba(40, 40, 40, 0.3);
     }
   }
   });
-  
-
-   refreshBtn.addEventListener('click', async function() {
-    scrollPos = document.getElementById('carousel').scrollLeft;
+       refreshBtn.addEventListener('click', async function() {
 
   const carousel = document.getElementById('carousel');
   carousel.innerHTML = ''; // 기존 슬라이드 제거
   const sidoCount = 17; // 시도 번호 1~17
   const apiBase = 'https://vote2022.imbc.com/Api/HuboListGPCG';
 
-  for (let sido = 1; sido <= sidoCount; sido++) {
+  for (let sido = 0; sido <= sidoCount; sido++) {
     try {
       const url = `${apiBase}?sido=${sido}&sungeo=undefined&isPoll=N&d=202505302020`;
       const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
@@ -912,7 +909,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
           .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            const state = doc.querySelector('#thread-14 .main table tbody tr td span a.thread-14').textContent[sido - 1];
+            const state = doc.querySelector('#thread-14 .main table tbody tr td span a.thread-14').textContent[sido];
             statusIcon.src = `../25p-beta/${state}.png`;
 
             if (state === 'C') {
@@ -943,10 +940,9 @@ border: 2px solid rgba(40, 40, 40, 0.3);
       console.error(`시도 ${sido} 데이터 오류:`, error);
     }
   }
-
-  document.getElementById('carousel').scrollLeft = scrollPos; // 이전 스크롤 위치로 복원
   });
   
+
 </script>
 
 </body>
