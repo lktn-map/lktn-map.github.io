@@ -546,7 +546,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
       // 각 시도별 하나의 슬라이드를 생성
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
-      slide.style.backgroundImage = `url('/${sidoName}.png')`;
+      slide.style.backgroundImage = `url('../25p-beta/${sidoName}.png')`;
 
       // 시도 이름을 추가
       const sidoTitle = document.createElement('div');
@@ -565,7 +565,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
         candidateDiv.style.justifyContent = 'space-between';
 
         const img = document.createElement('img');
-        img.src = `/${HBNAME}.png`;
+        img.src = `../25p-beta/${HBNAME}.png`;
         img.alt = HBNAME;
         img.style.display = 'relative';
         img.style.width = '60px';
@@ -702,7 +702,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             const state = doc.querySelector('#thread-14 .main table tbody tr td span a.thread-14').textContent[sido - 1];
-            statusIcon.src = `/${state}.png`;
+            statusIcon.src = `../25p-beta/${state}.png`;
 
             if (state === 'C') {
               statusIcon.style.maxWidth = '50px';
@@ -758,7 +758,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
       // 각 시도별 하나의 슬라이드를 생성
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
-      slide.style.backgroundImage = `url('/${sidoName}.png')`;
+      slide.style.backgroundImage = `url('../25p-beta/${sidoName}.png')`;
 
       // 시도 이름을 추가
       const sidoTitle = document.createElement('div');
@@ -777,7 +777,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
         candidateDiv.style.justifyContent = 'space-between';
 
         const img = document.createElement('img');
-        img.src = `/${HBNAME}.png`;
+        img.src = `../25p-beta/${HBNAME}.png`;
         img.alt = HBNAME;
         img.style.display = 'relative';
         img.style.width = '60px';
@@ -914,7 +914,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             const state = doc.querySelector('#thread-14 .main table tbody tr td span a.thread-14').textContent[sido - 1];
-            statusIcon.src = `/${state}.png`;
+            statusIcon.src = `../25p-beta/${state}.png`;
 
             if (state === 'C') {
               statusIcon.style.maxWidth = '50px';
