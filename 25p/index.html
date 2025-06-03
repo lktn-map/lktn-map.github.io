@@ -587,7 +587,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   const sido = Math.round(scrollLeft / (slideWidth + 16));
 
   const sggCount = [0, 25, 16, 9, 10, 5, 5, 5, 1, 44, 18, 14, 16, 15, 22, 23, 22, 2]; // 시도 번호 1~17
-  const apiBase = 'https://vote2022.imbc.com/Api/HuboList25GPCG';
+  const apiBase = 'https://vote2025.imbc.com/Api/HuboList25GPCG';
   detailContainer.innerHTML = '';
   carouselDetail.style.width = slideWidth + 'px';
 
@@ -691,7 +691,7 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
 
   carousel.innerHTML = ''; // 기존 슬라이드 제거
   const sidoCount = 17; // 시도 번호 1~17
-  const apiBase = 'https://vote2022.imbc.com/Api/HuboList25GPCG';
+  const apiBase = 'https://vote2025.imbc.com/Api/HuboList25GPCG';
 
   for (let sido = 0; sido <= sidoCount; sido++) {
     try {
