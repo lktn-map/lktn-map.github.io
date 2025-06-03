@@ -577,6 +577,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
     const detailContainer = document.getElementById('carouselDetail');
     let isFetching = false;
 
+
     refreshBtn.addEventListener('click', async function sggData(retries = 100) {
 
       if (isFetching) return; // 이미 실행 중이면 중단
@@ -661,7 +662,7 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
 
   // 시군구 이름
   const sigungName = document.createElement('div');
-  sigungName.innerHTML = `<span style="font-size: 1.2em; margin-left: 11px; margin-right: 11px; font-weight: 700;">${top.SGNAME}</span>`;
+  sigungName.innerHTML = `<span style="font-size: 1.1em; margin-left: 11px; margin-right: 11px; font-weight: 700;">${top.SGNAME}</span>`;
   row.appendChild(sigungName);
 
   // 우측 (2위 후보)
@@ -898,6 +899,15 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
    carousel.scrollLeft = scrollLeft;
 }
 loadSido();
+
+      document.getElementById('reloadBtn').addEventListener('click', async function () {
+        const button = document.getElementById('reloadBtn');
+        button.disabled = true;
+        button.textContent = '새로고침 중...';
+        await loadSido();
+        button.disabled = false;
+        button.textContent = '새로고침';
+      });
 
   // Retry every 1 minute
   setInterval(() => {
