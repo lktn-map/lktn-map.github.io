@@ -591,7 +591,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   detailContainer.innerHTML = '';
   carouselDetail.style.width = slideWidth + 'px';
 
-  const gepyo_url = `${apiBase}?sido=${sido}&sungeo=undefined&isPoll=N&d=202505302020`;
+  const gepyo_url = `${apiBase}?sido=${sido}&sungeo=undefined&d=202505302020`;
   const gepyo_response = await fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent(gepyo_url)}`);
   const gepyo_data = await gepyo_response.json();
 
