@@ -646,8 +646,8 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
   row.style.justifyContent = 'space-between';
   row.style.flexDirection = 'row';
 
-  const TOPGRATE = ((parseInt(top.GGPYO.replace(/,/g, ''))) / parseInt(data.TpGp.GEPYO_SUM.replace(/,/g, ''))) * 100;
-  const SECGRATE = ((parseInt(second.GGPYO.replace(/,/g, ''))) / parseInt(data.TpGp.GEPYO_SUM.replace(/,/g, ''))) * 100;
+  const TOPGRATE = top.GGRATE;
+  const SECGRATE = second.GGRATE;
 
   // 좌측 (1위 후보)
   const leftContainer = document.createElement('div');
@@ -741,7 +741,7 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
         candidateDiv.style.justifyContent = 'space-between';
         candidateDiv.style.overflow = 'hidden';
 
-        const GRATE = ((parseInt(GGPYO.replace(/,/g, ''))) / parseInt(data.TpGp.GEPYO_SUM.replace(/,/g, '')))*100;
+        const GRATE = GGRATE;
 
         const img = document.createElement('img');
         img.src = `../25p/${HBNAME}.png`;
