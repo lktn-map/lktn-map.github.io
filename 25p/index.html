@@ -875,7 +875,11 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
           statusIcon.style.alignSelf = 'center';
           candidateDiv.appendChild(statusIcon);
 
-          fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent('https://lktn.boards.net/board/4')}`)
+          fetch(`https://proxy.cors.sh/https://lktn.boards.net/board/4`, {
+        headers: {
+          'x-cors-api-key': 'live_c6621802acd7dcc0683fce9637772c329b4766f0b37f82eb31ee8be560cd9422'
+        }
+      })
           .then(response => response.text())
           .then(html => {
             const parser = new DOMParser();
