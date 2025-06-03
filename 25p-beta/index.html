@@ -399,9 +399,8 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   margin-top: 10px;
 }
 
-#refreshBtn {
+#refreshBtn, #reloadBtn {
    display: block;
-  margin: 2.5rem auto;
   padding: 0.6rem 1rem;
   background-color: #dae0e0;
   box-shadow: 0 0px 8px #aaacac30;
@@ -413,9 +412,17 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   font-weight: bold;
   font-family: 'KakaoBigSans', sans-serif;
   transition: background-color 0.2s ease;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-#refreshBtn:hover {
+#btnContainer {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem auto;
+}
+
+#refreshBtn:hover, #reloadBtn:hover {
   transition: background-color 0.2s ease;
   background-color: #bfc6c7;
   box-shadow: 0 0px 8px #aaacac50;
@@ -555,7 +562,10 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   width: 100%; aspect-ratio : 450 / 533;"></div>
 </div>
 <!-- 새로고침 버튼 -->
+ <div id="btnContainer">
 <button id="refreshBtn">상세 정보 조회</button>
+<button id="reloadBtn" onclick="loadSido();">새로고침</button>
+ </div>
 <div id="carouselDetail">
   </div>
 
@@ -584,7 +594,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   const gepyo_response = await fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent(gepyo_url)}`);
   const gepyo_data = await gepyo_response.json();
 
-  const gepyo = gepyo_data.TpGp.GEPYO_RATE
+  const gepyo = gepyo_data["TpGp"].GEPYO_RATE
 
   const gepyoRow = document.createElement('div');
   gepyoRow.className = 'table-row';
@@ -595,7 +605,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   gepyoRow.style.background = `linear-gradient(100deg, #55b34088 ${gepyo}%, rgba(255, 255, 255, 0.35) ${gepyo}%)`;
 
   gepyoRow.innerHTML = `
-    <div style="font-size: 1.2em; margin-left: 11px; font-weight: 700;">${gepyo_data.list[0].SDNAME} 개표율</div>
+    <div style="font-size: 1.2em; margin-left: 11px; font-weight: 700;">${gepyo_data["list"][0].SDNAME} 개표율</div>
     <div style="font-size: 1.5em; margin-right: 11px; font-weight: bold;">
       <span class="vote-int">${Math.floor(gepyo)}</span><span class="vote-decimal">.${(gepyo % 1).toFixed(1).slice(2)}%</span>
     </div>
@@ -612,14 +622,14 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
   const data = await response.json();
 
   // 응답 데이터 확인
-  console.log(`응답 데이터:`, data.list);
+  console.log(`응답 데이터:`, data["list"]);
 
-  if (!data.list || data.list.length < 2) {
+  if (!data["list"] || data["list"].length < 2) {
     continue; // 데이터가 없거나 부족하면 무시
   }
 
-  const top = data.list[0];
-  const second = data.list[1];
+  const top = data["list"][0];
+  const second = data["list"][1];
 
   const row = document.createElement('div');
   row.className = 'table-row';
@@ -675,6 +685,8 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
   });
 
        document.addEventListener('DOMContentLoaded', async function(retries = 100) {
+        async function loadSido() {
+          const scrollLeft = carousel.scrollLeft;
 
   carousel.innerHTML = ''; // 기존 슬라이드 제거
   const sidoCount = 17; // 시도 번호 1~17
@@ -686,10 +698,10 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
       const response = await fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent(url)}`);
       const data = await response.json();
 
-      const sidoName = data.list[0].SDNAME; // 시도 이름
+      const sidoName = data["list"][0].SDNAME; // 시도 이름
 
       // 상위 3명 후보자만 추출
-      const top3 = data.list.slice(0, 3);
+      const top3 = data["list"].slice(0, 3);
 
       // 각 시도별 하나의 슬라이드를 생성
       const slide = document.createElement('div');
@@ -883,6 +895,14 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
       console.error(`시도 ${sido} 데이터 오류:`, error);
     }
   }
+   carousel.scrollLeft = scrollLeft;
+}
+loadSido();
+
+  // Retry every 1 minute
+  setInterval(() => {
+    loadSido();
+  }, 120000);
   });
 
 </script>
