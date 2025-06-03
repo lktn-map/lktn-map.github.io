@@ -61,6 +61,32 @@
     font-style: normal;
 }
 
+@font-face {
+font-family: 'MyLotte';
+src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/MyLotteRegular.woff') format('woff');
+font-weight: 400;
+}
+
+@font-face {
+font-family: 'MyLotte';
+src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/MyLotteBold.woff') format('woff');
+font-weight: 700;
+}
+
+@font-face {
+    font-family: 'KakaoBigSans';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KakaoBigSans';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 
 
 
@@ -88,7 +114,7 @@
 
     body {
       margin: 0;
-      font-family: 'OAGothic', sans-serif;
+      font-family: 'KakaoBigSans', sans-serif;
       background-color: #f9fafe;
       color: #333;
       display: flex;
@@ -201,7 +227,7 @@
   background-size: 15px;
   padding-right: 30px;
   transition: border 0.2s ease;
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'KakaoBigSans', sans-serif;
 }
 
 
@@ -353,6 +379,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   padding: 10px 20px;
   border-radius: 15px;
   font-weight: bold;
+  font-family: 'OAGothic', sans-serif;
 }
 
 .carousel-btn {
@@ -374,12 +401,20 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   font-weight: normal;
 }
 
+.vote-pre {
+  font-size: 0.4em;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 5px;
+}
+
 .vote-title {
   font-size: 0.37em;
   font-weight: normal;
   display: block;
   margin-bottom: -78px;
   margin-top: 10px;
+  font-family: 'OAGothic', sans-serif;
 }
 
 @media screen and (max-width: 600px) {
@@ -417,44 +452,62 @@ border: 2px solid rgba(40, 40, 40, 0.3);
 </div>
 
     <script>
-        // CORS 허용 사이트 예제 (JSONPlaceholder)
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('data-container');
-            
-           fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://vote2025.imbc.com/PreVote/Region?d=202506010326')}`)
-.then(response => response.json())
-  .then(data => {
-    const parsedData = JSON.parse(data.contents);
-    const voteList = parsedData.PreVoteInfoList;
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('data-container');
 
-    const carousel = document.getElementById('carousel');
-    
-    voteList
-    .forEach(region => {
-      const regionName = region.REGEION_NAME_B;
-      const voteRate = region.REGEION_VOTE_RATE;
+    fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://vote2025.imbc.com/Api/TP25Sido?d=202506031041')}`)
+    .then(response => response.json())
+    .then(data => {
+        const voteList = JSON.parse(data.contents); // 이미 배열 형태
 
-      const slide = document.createElement('div');
-      slide.className = 'carousel-slide';
-      slide.style.backgroundImage = `url('../25p/${regionName}.png')`; // 지역 이름에 따라 이미지 선택
+        const carousel = document.getElementById('carousel');
 
-      const [intPart, decimalPart] = voteRate.toFixed(2).split('.');
+        voteList.forEach(region => {
+            const regionName = region.SDNAME; // ex) "서울시" or "서울"
+            const voteRate = region.TP_RATE_REAL || region.TP_RATE; // 더 정밀한 투표율 우선
 
-const overlay = document.createElement('div');
-overlay.className = 'vote-rate-overlay';
-overlay.innerHTML = `<span class="vote-title">이 시각 사전투표율</span><br>
-  <span class="vote-int">${intPart}</span><span class="vote-decimal">.${decimalPart}</span>
-`;
+            const prevote = [
+              {"SDNAME":"전국","TP_RATE_REAL":34.74},
+        {"SDNAME":"서울","TP_RATE_REAL":34.28},
+        {"SDNAME":"부산","TP_RATE_REAL":30.37},
+        {"SDNAME":"대구","TP_RATE_REAL":25.63},
+        {"SDNAME":"인천","TP_RATE_REAL":32.79},
+        {"SDNAME":"광주","TP_RATE_REAL":52.12},
+        {"SDNAME":"대전","TP_RATE_REAL":33.88},
+        {"SDNAME":"울산","TP_RATE_REAL":32.01},
+        {"SDNAME":"세종","TP_RATE_REAL":41.16},
+        {"SDNAME":"경기","TP_RATE_REAL":32.88},
+        {"SDNAME":"강원","TP_RATE_REAL":36.60},
+        {"SDNAME":"충북","TP_RATE_REAL":33.72},
+        {"SDNAME":"충남","TP_RATE_REAL":32.38},
+        {"SDNAME":"전북","TP_RATE_REAL":53.01},
+        {"SDNAME":"전남","TP_RATE_REAL":56.50},
+        {"SDNAME":"경북","TP_RATE_REAL":31.52},
+        {"SDNAME":"경남","TP_RATE_REAL":31.71},
+        {"SDNAME":"제주","TP_RATE_REAL":35.11}
+    ];
 
-      slide.appendChild(overlay);
-      carousel.appendChild(slide);
-    });
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            slide.style.backgroundImage = `url('../25p/${regionName}.png')`; // 이미지 경로
 
-    // 캐러셀 작동
-    const slides = document.querySelectorAll('.carousel-slide');
-    let currentIndex = 0;
-  });
+            const [intPart, decimalPart] = voteRate.toFixed(3).split('.');
+
+            const overlay = document.createElement('div');
+            overlay.className = 'vote-rate-overlay';
+            overlay.innerHTML = `<span class="vote-title">이 시각 투표율</span><br>
+                <span class="vote-int">${intPart}</span><span class="vote-decimal">.${decimalPart}</span><br>
+                <span class="vote-pre">사전투표율 ${prevote.find(item => item.SDNAME === regionName).TP_RATE_REAL}</span>`;
+
+            slide.appendChild(overlay);
+            carousel.appendChild(slide);
         });
+
+        // 캐러셀 작동을 위한 추가 코드가 필요한 경우 여기에 작성
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentIndex = 0;
+    });
+});
     </script>
 </body>
 </html>
