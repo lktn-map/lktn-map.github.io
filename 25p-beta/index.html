@@ -675,7 +675,6 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
   });
 
        document.addEventListener('DOMContentLoaded', async function(retries = 100) {
-        async function  sidoData() {
 
   carousel.innerHTML = ''; // 기존 슬라이드 제거
   const sidoCount = 17; // 시도 번호 1~17
@@ -884,13 +883,6 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
       console.error(`시도 ${sido} 데이터 오류:`, error);
     }
   }
-}
-sidoData();
-
-  // Retry every 1 minute
-  setInterval(() => {
-    sidoData();
-  }, 60 * 1000); // 60,000 milliseconds
   });
 
 </script>
