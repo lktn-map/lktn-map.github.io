@@ -583,9 +583,8 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   const gepyo_url = `${apiBase}?sido=${sido}&sungeo=undefined&isPoll=N&d=202505302020`;
   const gepyo_response = await fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent(gepyo_url)}`);
   const gepyo_data = await gepyo_response.json();
-  const gepyo_parsedData = JSON.parse(gepyo_data.contents);
 
-  const gepyo = gepyo_parsedData.TpGp.GEPYO_RATE
+  const gepyo = gepyo_data.TpGp.GEPYO_RATE
 
   const gepyoRow = document.createElement('div');
   gepyoRow.className = 'table-row';
@@ -596,7 +595,7 @@ border: 2px solid rgba(40, 40, 40, 0.3);
   gepyoRow.style.background = `linear-gradient(100deg, #55b34088 ${gepyo}%, rgba(255, 255, 255, 0.35) ${gepyo}%)`;
 
   gepyoRow.innerHTML = `
-    <div style="font-size: 1.2em; margin-left: 11px; font-weight: 700;">${gepyo_parsedData.list[0].SDNAME} 개표율</div>
+    <div style="font-size: 1.2em; margin-left: 11px; font-weight: 700;">${gepyo_data.list[0].SDNAME} 개표율</div>
     <div style="font-size: 1.5em; margin-right: 11px; font-weight: bold;">
       <span class="vote-int">${Math.floor(gepyo)}</span><span class="vote-decimal">.${(gepyo % 1).toFixed(1).slice(2)}%</span>
     </div>
@@ -611,17 +610,16 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
 
   const response = await fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent(url)}`);
   const data = await response.json();
-  const parsedData = JSON.parse(data.contents);
 
   // 응답 데이터 확인
-  console.log(`응답 데이터:`, parsedData.list);
+  console.log(`응답 데이터:`, data.list);
 
-  if (!parsedData.list || parsedData.list.length < 2) {
+  if (!data.list || data.list.length < 2) {
     continue; // 데이터가 없거나 부족하면 무시
   }
 
-  const top = parsedData.list[0];
-  const second = parsedData.list[1];
+  const top = data.list[0];
+  const second = data.list[1];
 
   const row = document.createElement('div');
   row.className = 'table-row';
@@ -688,12 +686,11 @@ for (let sgg = 1; sgg <= sggCount[sido]; sgg++) {
       const url = `${apiBase}?sido=${sido}&sungeo=undefined&isPoll=N&d=202505302020`;
       const response = await fetch(`https://corsproxy.io/?key=f3237fca&url=${encodeURIComponent(url)}`);
       const data = await response.json();
-      const parsedData = JSON.parse(data.contents);
 
-      const sidoName = parsedData.list[0].SDNAME; // 시도 이름
+      const sidoName = data.list[0].SDNAME; // 시도 이름
 
       // 상위 3명 후보자만 추출
-      const top3 = parsedData.list.slice(0, 3);
+      const top3 = data.list.slice(0, 3);
 
       // 각 시도별 하나의 슬라이드를 생성
       const slide = document.createElement('div');
