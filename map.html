@@ -1,1178 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>종합정치정보플랫폼 LKTN</title>
+  <title>록탄: 민주주의의 푸른 여울</title>
   <link rel="icon" type="image/x-icon" href="/icon.ico">
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1MMHP5CZBK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1MMHP5CZBK');
-</script>
-<meta name="naver-site-verification" content="b36ea91b8963f7747309d0e49077c452494afedc" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1MMHP5CZBK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1MMHP5CZBK');
+  </script>
+  <meta name="naver-site-verification" content="b36ea91b8963f7747309d0e49077c452494afedc" />
   <style>
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    @keyframes region-pulse {
-  0% {
-    stroke: rgba(0, 205, 144, 0.6);
-    stroke-width: 3;
-  }
-  50% {
-    stroke: rgba(0, 205, 144, 0.2);
-    stroke-width: 6;
-  }
-  100% {
-    stroke: rgba(0, 205, 144, 0);
-    stroke-width: 3;
-  }
-}
-
-    @font-face {
-        font-family: 'Pretendard';
-        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    @font-face {
-        font-family: 'Pretendard';
-        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
-        font-weight: 700;
-        font-style: normal;
-    }
-
+    /* -------------------- Fonts -------------------- */
+@font-face {font-family:'Shilla_CultureB-Bold';src:url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/Shilla_CultureB-Bold.woff2') format('woff2');font-weight:700;font-style:normal;}
+@font-face {font-family:'Arita-buri-SemiBold';src:url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-buri-SemiBold.woff') format('woff');font-weight:600;font-style:normal;}
 @font-face {
-    font-family: 'KakaoBigSans';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-ExtraBold.woff2') format('woff2');
-    font-weight: 800;
-    font-style: normal;
+    font-family: 'PyeojinGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
 }
-
 @font-face {
-    font-family: 'KakaoBigSans';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-Regular.woff2') format('woff2');
+    font-family: 'PyeojinGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Regular.woff2') format('woff2');
     font-weight: 400;
-    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PyeojinGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
 }
 
-    body {
-      margin: 0;
-      font-family: 'KakaoBigSans', sans-serif;
-      background-color: #f7f9fb;
-      color: #333;
-      padding: 20px;
+    /* -------------------- Design Tokens -------------------- */
+    *{box-sizing:border-box}
+    :root{
+      --bg:#0b1020;             /* page bg */
+      --surface:#0f1530;         /* surface panel */
+      --card:#111939cc;          /* glass card */
+      --stroke:rgba(255,255,255,.08);
+      --text:#eaf0ff;
+      --muted:#aab6e6;
+      --primary:#6ea8ff;         /* accent 1 */
+      --accent:#9b8cff;          /* accent 2 */
+      --ok:#00c690;              /* success */
+      --warn:#ff4d4f;            /* danger */
+      --radius:14px;
+      --maxw:920px;
+      --shadow:0 14px 40px rgba(0,0,0,.35);
+      --glow:0 10px 30px rgba(110,168,255,.2);
     }
 
-       #toolbar-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  margin: 20px auto;
-  width: 920px;
-}
+    html,body{height:100%}
+    body{margin:0;font-family:'PyeojinGothic',system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans',Apple SD Gothic Neo,Malgun Gothic,sans-serif;background:var(--bg);color:var(--text);padding:16px}
 
-#toolbar {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  padding: 15px 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding-left: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  scrollbar-width: none;
-  width: 635px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
+    /* -------------------- Background Effects -------------------- */
+    .backdrop{position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(110,168,255,.26), transparent 60%),
+      radial-gradient(900px 600px at 95% 0%, rgba(155,140,255,.2), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0))}
+    .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.07;mix-blend-mode:soft-light;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.6"/></svg>')}
 
-#toolbar::-webkit-scrollbar {
-  display: none;
-}
+    /* -------------------- Topbar (kept) -------------------- */
 
-.scroll-button {
-  background: #ffffff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background 0.2s ease;
-}
+    #topbar {display:flex;justify-content:space-between;align-items:center;background:#0d132b;padding:14px 20px;border-radius:12px;margin-bottom:24px;box-shadow:0 2px 20px rgba(0,0,0,.25);font-size:17px;position:sticky;top:8px;z-index:3000;width:calc(100% - 48px);max-width:920px;margin-left:auto;margin-right:auto;margin-top:8px;border:1px solid rgba(255,255,255,.06)}
+#topbar a{text-decoration:none;color:#ccd6ff;margin:0 10px;font-weight:500}
+#topbar a:hover{color:#fff}
+#topbar select{background-color:#0b1020;color:#e7ecff;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;font-size:14px;outline:none;appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14l-4.796-5.481c-.566-.648-.106-1.659.753-1.659h9.592c.86 0 1.32 1.01.753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:15px;padding-right:34px;transition:border .2s ease;font-family:'PyeojinGothic',sans-serif}
+#topbar select:hover,#topbar select:focus{border-color:rgba(110,168,255,.7)}
 
-.scroll-button:hover {
-  background: #f0f0f0;
-}
+    @media (max-width:1000px){#topbar{width:100%;max-width:var(--maxw)}}
+    @media (max-width:480px){.topbar-links{display:none}#topbar{padding:12px 16px}}
 
+    /* -------------------- Tutorial Overlay -------------------- */
+    #tutorial-overlay{position:fixed;inset:0;background:rgba(3,6,20,.82);color:#fff;z-index:99999;display:none;flex-direction:column;justify-content:center;align-items:center;padding:30px;text-align:center;transition:opacity .5s ease-out}
+    #tutorial-overlay .panel{max-width:520px;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));border:1px solid var(--stroke);padding:22px;border-radius:16px;box-shadow:var(--shadow)}
+    #tutorial-overlay h1{font-size:22px;margin:0 0 12px}
+    #tutorial-close{margin-top:18px;padding:10px 16px;font-size:16px;border:none;border-radius:10px;background:var(--ok);color:#041018;cursor:pointer}
 
+    /* -------------------- Toolbar -------------------- */
+    #toolbar-wrapper{position:relative;display:flex;align-items:center;overflow:hidden;margin:16px auto;width:var(--maxw)}
+    #toolbar-inside-wrapper{display:flex;align-items:center;max-width:100%;gap:10px}
+    #toolbar{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:14px 16px;background:var(--card);backdrop-filter:blur(10px);border-radius:14px;border:1px solid var(--stroke);box-shadow:var(--glow);scrollbar-width:none;width:640px;margin:0 10px}
+    #toolbar::-webkit-scrollbar{display:none}
+    .scroll-button{background:var(--card);border:1px solid var(--stroke);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#e6ecff}
+    .scroll-button:hover{filter:brightness(1.12)}
 
-    .party-selector {
-  scroll-snap-align: end; /* Optional: snap to the end of each item */
-  flex: 0 0 auto; /* Prevent shrinking, no wrapping */
-  display: flex;
-  padding-right: 30px;
-  flex-direction: column;
-  align-items: center;
-}
+    .party-selector{scroll-snap-align:end;flex:0 0 auto;display:flex;padding-right:26px;flex-direction:column;align-items:center;min-width:140px}
+    .party-selector>div:first-child{margin-bottom:6px;font-weight:700;color:#eaf0ff}
+    .swatches{display:flex;gap:4px}
+    .color-swatch{display:inline-block;width:22px;height:26px;cursor:pointer;border-radius:6px;border:1px solid rgba(255,255,255,.18);box-shadow:0 1px 5px rgba(0,0,0,.25);transition:transform .1s ease, box-shadow .2s;}
+    .color-swatch.selected{box-shadow:0 0 0 3px rgba(255,255,255,.3), 0 6px 18px rgba(0,0,0,.35);transform:scale(1.06)}
+    .color-swatch:hover{transform:scale(1.08)}
 
-    .party-selector input[type="color"] {
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 10px;
+    #remove-color,#save-png-button{display:inline-flex;align-items:center;justify-content:center;padding:10px;border-radius:10px;cursor:pointer;border:none}
+    #remove-color{width:60px;height:40px;background:var(--warn);box-shadow:0 6px 16px rgba(255,77,79,.35)}
+    #remove-color.selected{outline:2px solid rgba(255,77,79,.5);box-shadow:0 0 0 3px rgba(255,77,79,.35) inset}
+    #save-png-button{width:60px;height:40px;background:var(--ok);margin-left:6px;margin-right:24px;box-shadow:0 6px 16px rgba(0,198,144,.35)}
+
+    /* -------------------- Map & Legend -------------------- */
+    #map-container{position:relative;max-width:var(--maxw);margin:0 auto}
+    #map{width:100%;height:auto;border-radius:14px;background:var(--card);padding:18px 16px 34px 16px;border:1px solid var(--stroke);box-shadow:var(--shadow)}
+    #legend{background:rgba(15,21,48,.9);backdrop-filter:blur(8px);border:1px solid var(--stroke);box-shadow:var(--glow);max-height: 530px; overflow-y: auto; padding-top: 17px; padding-bottom: 0px; width: 120px; scrollbar-width: none;position: absolute; left: 13px; top: 13px; border-radius: 10px; padding: 10px 15px; font-size: 15px;}
+    #legend::-webkit-scrollbar{display:none}
+    #legend-wrapper{transition:height .4s ease;scroll-snap-type:y mandatory;margin:0;padding:0}
+    .legend-item{opacity:0;margin-bottom:17px;scroll-snap-align:end;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
+    .legend-item:last-child{margin-bottom:4px;}
+    .legend-item:first-child{margin-top:4px;}
+    .legend-item.visible{opacity:1;transform:translateY(0)}
+    .legend-item>div{font-weight:400;color:#eaf0ff}
+    .legend-color{display: inline-block; width: 18.5px; height: 18.5px; margin-right: 8px; vertical-align: -4.5px; font-size: 12px;border:1px solid rgba(255,255,255,.18); border-radius:5px;}
+
+    .cls-1,.cls-2{transition:120ms ease-out}
+    .cls-1:hover,.cls-2:hover{filter:brightness(1.2)}
+
+    /* -------------------- List Section -------------------- */
+    #uncolored-regions-list{background:var(--card);backdrop-filter:blur(10px);padding:14px 18px 22px;border-radius:14px;border:1px solid var(--stroke);box-shadow:var(--shadow);width:var(--maxw);margin:14px auto 0}
+    #uncolored-regions-list h2{font-size:20px;margin:6px 0 12px;font-weight:800;color:#dfe6ff}
+    #uncolored-regions{display:flex;flex-wrap:wrap;overflow-x:auto;white-space:wrap;gap:6px;scrollbar-width:none}
+    #uncolored-regions::-webkit-scrollbar{display:none}
+
+    /* -------------------- Tooltip -------------------- */
+    #tooltip{position:absolute;background:#1a2146;color:#fff;padding:6px 10px;font-size:14px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .1s ease;z-index:1000;border:1px solid var(--stroke)}
+
+    /* -------------------- Responsive -------------------- */
+    @media (max-width:1000px){
+      #map-container,#toolbar-wrapper,#uncolored-regions-list{width:100%;max-width:var(--maxw)}
+      #toolbar-wrapper{position:sticky;top:75px;z-index:60000;background:#0b1020cc;border-radius:12px;padding:6px 10px 8px 20px;margin-top:-4px;margin-bottom:12px;}
+      .scroll-button{display:none}
+      #map{padding:14px}
+      #legend{opacity:0;pointer-events:none}
+      #uncolored-regions-list{padding:12px 14px}
     }
-
-    .swatches {
-      display: flex;
-    }
-
-    .color-swatch {
-    display: inline-block;
-    width: 20px;
-    height: 25px;
-    cursor: pointer;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    transition: transform 0.1s ease, box-shadow 0.2s;
-    }
-
-    .color-swatch.selected {
-        border-color: #000;
-        box-shadow: 0 0 0 3px #00000033;
-        transform: scale(1.05);
-    }
-
-    .color-swatch:hover {
-      transform: scale(1.1);
-    }
-
-    .color-swatch:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    z-index: 100
-    }
-
-
-    #remove-color {
-        background: #ff4d4f;
-        display: inline-block;
-        width: 60px;
-        height: 40px;
-        cursor: pointer;
-        box-shadow: 0 1px 4px rgba(255, 77, 79, 0.4);
-        transition: transform 0.1s ease, box-shadow 0.2s;
-        border: none;
-        margin: 10px;
-    }
-
-    #remove-color.selected {
-        border-color: #000;
-        box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.4);
-        transform: scale(1.05);
-    }
-
-    #remove-color:hover {
-      transform: scale(1.1);
-    }
-
-    #remove-color:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 6px rgba(255, 77, 79, 0.4); 
-    z-index: 100
-    }
-
-    #save-png-button {
-        background: rgb(0, 205, 144);
-        display: inline-block;
-        width: 60px;
-        height: 40px;
-        cursor: pointer;
-        box-shadow: 0 1px 4px rgba(0, 205, 144, 0.4);
-        transition: transform 0.1s ease, box-shadow 0.2s;
-        border: none;
-        margin: 10px;
-        margin-left: 5px;
-        margin-right: 35px;
-    }
-
-    #save-png-button:hover {
-      transform: scale(1.1);
-    }
-
-    #save-png-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 6px rgba(0, 205, 144, 0.4); 
-    z-index: 100
-    }
-    #map-container {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    #map {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      background: #fff;
-      padding-left: 40px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    #legend {
-      position: absolute;
-      left: 13px;
-      top: 13px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 10px;
-      padding: 10px 15px;
-      font-size: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      max-height: 530px;
-      overflow-y: auto;
-      padding-top: 17px;
-      padding-bottom: 0px;
-      width: 120px;
-      scrollbar-width: none;
-}
- 
-#legend-wrapper {
-  scrollbar-width: none;
-  transition: height 0.4s ease;
-  scroll-snap-type: y mandatory;
-  margin: 0;
-  padding: 0;
-}
-
-#legend-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
-#legend::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
-.legend-item {
-  opacity: 0;
-  margin-bottom: 17px;
-  scroll-snap-align: end;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.legend-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-    .legend-item > div {
-      font-weight: 400;
-    }
-
-    .legend-color {
-      display: inline-block;
-      width: 18.5px;
-      height: 18.5px;
-      margin-right: 8px;
-      vertical-align: -4.5px;
-      font-size: 12px;
-    }
-
-    .uncolored-regions {
-      width: 900px;
-      display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  white-space: nowrap;
-    }
-
-    .cls-1, .cls-2 {
-      transition: 100ms ease-out;
-    }
-
-    .cls-1:hover, .cls-2:hover {
-      fill: #909090;
-    }
-    
-    #map {
-      width: 900px;
-      padding-bottom: 30px;
-    }
-
-    #topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ffffff;
-  padding: 15px 25px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  font-size: 17px;
-  position: sticky;
-  top: 8px;
-  z-index: 3000;
-  width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#topbar a {
-  text-decoration: none;
-  color: #333;
-  margin: 0 10px;
-  font-weight: 500;
-}
-
-#topbar a:hover {
-  color: #007acc;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.mode-switch {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#mode-select {
-  padding: 5px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-
-    #topbar select {
-  background-color: #f0f4f8;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 6px 10px;
-  font-size: 14px;
-  outline: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14l-4.796-5.481c-.566-.648-.106-1.659.753-1.659h9.592c.86 0 1.32 1.01.753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 15px;
-  padding-right: 30px;
-  transition: border 0.2s ease;
-  font-family: 'KakaoBigSans', sans-serif;
-}
-
-#toolbar-inside-wrapper {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 100%;
-}
-
-#topbar select:hover,
-#topbar select:focus {
-  border-color: #007acc;
-}
-
-@media (max-width: 1000px) {
-  #topbar {
-    width: 100%;
-    max-width: 900px;
-    display: flex;
-  }
-
-  #map-container {
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #toolbar-wrapper {
-    width: 100%;
-    max-width: 900px;
-    position: sticky;
-    top: 75px;
-    z-index: 60000;
-    background: #fffc;
-    border-radius: 12px;
-    padding: 5px;
-    margin-top: -5px;
-    margin-bottom: 15px;
-  }
-
-  #toolbar {
-    margin: 0 8px;
-  }
-
-  .scroll-button {
-    display: none; /* hide arrow buttons on mobile */
-  }
-
-  #map {
-    width: 100%;
-    max-width: 900px;
-    padding-left: 0;
-    padding-bottom: 4vw;
-    padding-right: 1vw;
-  }
-
-  #remove-color:hover {
-        border-color: #000;
-        box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.4);
-        transform: scale(1.05);
-    }
-
-  #legend {
-    display: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #uncolored-regions-list {
-    width: 100% !important;
-    max-width: 900px;
-    display: flex;
-    flex-wrap: wrap;         /* allow wrapping */
-    overflow-x: visible;     /* no horizontal scroll needed */
-    padding: 13px 30px 25px !important;
-  }
-
-  h2 {
-    padding-left: 5px;
-  }
-
-  #scroll-left, #scroll-right {
-    display: none !important; /* hide scroll buttons on mobile */
-  }
-
-}
-
-@media (max-width: 750px) {
-  #remove-color {
-    margin-right: 7px;
-  }
-
-  #save-png-button {
-    margin-right: 7px;
-  }
-}
-
-@media (max-width: 480px) {
-  .topbar-links {
-    display: none;
-  }
-
-  #topbar {
-    padding: 15px 18px;
-  }
-}
- 
-@media (max-width: 400px) {
-  #maker {
-    display: block;
-  }
-
-  #toolbar-wrapper {
-    top: 90px;
-  }
-
-}
-
+    @media (max-width:750px){#save-png-button{margin-right:8px}}
   </style>
 </head>
 <body>
-  <div id="tutorial-overlay" style="
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  z-index: 99999;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  text-align: center;
-  transition: opacity 0.5s ease-out;
-">
-  <div style="max-width: 500px;">
-    <h1 style="font-size: 24px; margin-bottom: 20px;">LKTN<span style="font-size: 0.8em; font-weight: 400;">(v1.5.0)</span> 사용 안내</h1>
-    <p style="font-size: 16px; margin-bottom: 16px;">정당 색상을 선택해 지도나 하단 목록을 클릭해 보세요.<br />모바일에서는 색상 목록을 스크롤할 수 있습니다.<br />색상 제거 버튼을 길게 누르거나<br/>Shift와 함께 누르면 전체 초기화됩니다.</p>
-    <p style="font-size: 15px; opacity: 0.7;">처음 한 번만 표시됩니다.</p>
-    <button id="tutorial-close" style="
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #00c690;
-      color: white;
-      cursor: pointer;
-    ">시작하기</button>
+  <div class="backdrop"></div>
+  <div class="grain"></div>
+
+  <!-- Tutorial Overlay -->
+  <div id="tutorial-overlay">
+    <div class="panel">
+      <h1>LKTN<span style="font-size:.8em;font-weight:400">(v1.5.0)</span> 사용 안내</h1>
+      <p style="font-size:15px;margin:0 0 12px">정당 색상을 선택해 지도나 하단 목록을 클릭해 보세요. 모바일에서는 색상 목록을 스크롤할 수 있습니다.<br>색상 제거 버튼을 길게 누르거나 <b>Shift</b>와 함께 누르면 전체 초기화됩니다.</p>
+      <p style="font-size:13px;opacity:.7;margin:0">처음 한 번만 표시됩니다.</p>
+      <button id="tutorial-close">시작하기</button>
+    </div>
   </div>
-</div>
 
+  <!-- Topbar (원본 구조 유지) -->
+      <header id="topbar">
+    <div class="topbar-left"><a href="/" style="margin:0"><img class="logo" style="width:45px" src="/icon.png" alt="LKTN"></a></div>
+    <nav class="topbar-links">
+      <a href="/link">단축링크</a>
+      <a href="/map">지도</a>
+      <a href="/politician">정치인</a>
+    </nav>
+    <div class="mode-switch">
+      <select id="mode-select">
+        <option value="a">시군구</option>
+        <option value="b">광역자치단체</option>
+        <option value="c">국회의원</option>
+      </select>
+    </div>
+  </header>
 
-    <header id="topbar">
-        <div class="topbar-left">
-          <a href="/" style="margin: 0;"><img class="logo" style="width:45px;" src="/icon.png"></img></a>
-        </div>
-        <nav class="topbar-links">
-          <a href="/map">지도</a>
-          <a href="/politician">정치인</a>
-        </nav>
-        <div class="mode-switch">
-          <select id="mode-select">
-            <option value="a">시군구</option>
-            <option value="b">광역자치단체</option>
-            <option value="c">국회의원</option>
-          </select>
-        </div>
-      </header>
+  <div id="tooltip"></div>
+  <!-- Toolbar -->
+  <div id="toolbar-wrapper">
+    <div id="toolbar-inside-wrapper">
+      <button id="remove-color" title="색상 제거(길게 누르면 전체 초기화)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" viewBox="0 0 24 24"><path d="M9 3V4H4V6H5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V6H20V4H15V3H9M7 6H17V19H7V6Z"/></svg>
+      </button>
+      <button id="save-png-button" onclick="downloadSVGAsPNG()" title="PNG로 저장">
+        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="Complete"><g id="download"><g><path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7" fill="none" stroke="#0b1020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><g><polyline data-name="Right" fill="none" id="Right-2" points="7.9 12.3 12 16.3 16.1 12.3" stroke="#0b1020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line fill="none" stroke="#0b1020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="2.7" y2="14.2"/></g></g></g></svg>
+      </button>
+      <button id="scroll-left" class="scroll-button" aria-label="Scroll left">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div id="toolbar"></div>
+      <button id="scroll-right" class="scroll-button" aria-label="Scroll right">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
 
-      
-    <div id="tooltip" style="
-    position: absolute;
-    background: #333;
-    color: white;
-    padding: 4px 10px;
-    font-size: 14.5px;
-    border-radius: 4px;
-    pointer-events: none;
-    opacity: 0;
-    padding-top: 3px;
-    transition: opacity 0.1s ease;
-    z-index: 1000;
-  "></div>
-
-  <div id="toolbar-wrapper"> <div id="toolbar-inside-wrapper">
-  <button id="remove-color"
-    style="padding: 10px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" viewBox="0 0 24 24">
-      <path d="M9 3V4H4V6H5V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V6H20V4H15V3H9M7 6H17V19H7V6Z" />
-    </svg>
-  </button>
-
-  <button id="save-png-button" 
-    onclick="downloadSVGAsPNG()"
-  style="padding: 10px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <title/>     
-        <g id="Complete">      
-        <g id="download">      
-       <g>       
-        <path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>     
-        <g>       
-        <polyline data-name="Right" fill="none" id="Right-2" points="7.9 12.3 12 16.3 16.1 12.3" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>      
-        <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="2.7" y2="14.2"/>    
-        </g>
-        </g>
-    </g>
-        </g>
-        </svg>
-</button>
-<button id="scroll-left" class="scroll-button" aria-label="Scroll left" style="align-items: center; justify-content: center; display: flex;">
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-  <div id="toolbar"></div>
-  <button id="scroll-right" class="scroll-button" aria-label="Scroll right" style="align-items: center; justify-content: center; display: flex;">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-</div> </div>
-
+  <!-- Map -->
   <div id="map-container">
     <svg id="map" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-      <!-- Regions (simplified South Korea) -->
       <g id="regions">
-        <?xml version="1.0" encoding="UTF-8"?>
-        <?xml version="1.0" encoding="UTF-8"?>
-<svg id="innermap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 592 840">
-</svg>
+        <!-- 외부에서 주입되는 실제 지도 SVG들 -->
+        <svg id="innermap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 592 840"></svg>
       </g>
     </svg>
     <div id="legend"><div id="legend-wrapper"></div></div>
   </div>
 
-  <div id="uncolored-regions-list" style="
-  background: #fff;
-  padding: 13px 40px 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 900px;
-  margin: 15px auto 0;
-">
-  <h2 style="
-    font-size: 22px;
-    margin-top: 20px;
-    margin-bottom: 12px;
-    font-weight: 700;
-    display: inline-block;
-    text-align: center;
-  ">목록으로 색칠하기</h2>
-  <div id="uncolored-regions"></div>
-</div>
+  <!-- List -->
+  <div id="uncolored-regions-list">
+    <h2>목록으로 색칠하기</h2>
+    <div id="uncolored-regions"></div>
+  </div>
 
+  <!-- Scripts: 기존 로직 대부분 유지 (DOM id/class 변경 없음) -->
   <script>
-    let regionList = []; 
-
+    let regionList = [];
     const parties = [
-      { id: 'party1', name: '더불어민주당', base: '#3546b5', levels: [] },
-      { id: 'party2', name: '국민의힘', base: '#E61E2B', levels: [] },
-      { id: 'party3', name: '개혁신당', base: '#FF7210', levels: [] },
-      { id: 'party4', name: '진보당', base: '#d60072', levels: [] },
-      { id: 'party5', name: '민주노동당', base: '#f6b93b', levels: [] },
-      { id: 'party7', name: '새미래민주당', base: '#59afb5', levels: [] },
-      { id: 'party8', name: '기본소득당', base: '#00D2C3', levels: [] },
-      { id: 'party9', name: '조국혁신당', base: '#2188bf', levels: [] },
-      { id: 'party10', name: '자유통일당', base: '#4371a3', levels: [] },
-      { id: 'party11', name: '무소속', base: '#808080', levels: [] },
+      { id:'party1', name:'더불어민주당', base:'#3546b5', levels:[] },
+      { id:'party2', name:'국민의힘', base:'#E61E2B', levels:[] },
+      { id:'party3', name:'개혁신당', base:'#FF7210', levels:[] },
+      { id:'party4', name:'진보당', base:'#d60072', levels:[] },
+      { id:'party5', name:'민주노동당', base:'#f6b93b', levels:[] },
+      { id:'party7', name:'새미래민주당', base:'#59afb5', levels:[] },
+      { id:'party8', name:'기본소득당', base:'#00D2C3', levels:[] },
+      { id:'party9', name:'조국혁신당', base:'#2188bf', levels:[] },
+      { id:'party10', name:'자유통일당', base:'#4371a3', levels:[] },
+      { id:'party11', name:'무소속', base:'#808080', levels:[] },
     ];
-  
-    function generateShades(baseColor, options = {}) {
-  const {
-    hueShift = 0,
-    saturationAdjust = 0,
-  } = options;
 
-  const shades = [];
-  const hsl = rgbToHsl(hexToRgb(baseColor));
-  const baseHue = (hsl.h + hueShift) % 360;
-  const baseSaturation = clamp(hsl.s + saturationAdjust, 0, 100);
+    function clamp(v,min,max){return Math.min(Math.max(v,min),max)}
+    function hexToRgb(hex){const r=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);return r?{r:parseInt(r[1],16),g:parseInt(r[2],16),b:parseInt(r[3],16)}:null}
+    function rgbToHsl(rgb){let r=rgb.r/255,g=rgb.g/255,b=rgb.b/255;const m=Math.max(r,g,b),n=Math.min(r,g,b);let h,s,l=(m+n)/2;if(m===n){h=s=0}else{const d=m-n;s=l>0.5?d/(2-m-n):d/(m+n);switch(m){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break}h/=6}return{h:h*360,s:s*100,l:l*100}}
+    function hslToHex(h,s,l){l/=100;const a=s*Math.min(l,1-l)/100;const f=n=>{const k=(n+h/30)%12;const c=l-a*Math.max(Math.min(k-3,9-k,1),-1);return Math.round(255*c).toString(16).padStart(2,'0')};return`#${f(0)}${f(8)}${f(4)}`}
+    function generateShades(baseColor,{hueShift=0,saturationAdjust=0}={}){const shades=[];const hsl=rgbToHsl(hexToRgb(baseColor));const baseHue=(hsl.h+hueShift)%360;const baseSat=clamp(hsl.s+saturationAdjust,0,100);const ls=[12,18,32,hsl.l,70,90];for(let l of ls){shades.push(hslToHex(baseHue,baseSat,l))}return shades}
 
-  const lightnessValues = [10, 15, 30, hsl.l, 70, 90]; // dark → base → light
+    let selectedParty=null, selectedLevel=null;
 
-  for (let l of lightnessValues) {
-    shades.push(hslToHex(baseHue, baseSaturation, l));
-  }
-
-  return shades;
-}
-
-
-function lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
-function easeOut(t) {
-  return 1 - Math.pow(1 - t, 2);
-}
-
-function easeIn(t) {
-  return t * t;
-}
-
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
-}
-
-// (hexToRgb, rgbToHsl, hslToHex) remain unchanged from your original
-
-  
-    function hexToRgb(hex) {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      } : null;
+    function initSwatches(){
+      const toolbar=document.getElementById('toolbar');
+      parties.forEach(p=>{p.levels=generateShades(p.base);const sw=p.levels.map((c,i)=>`<div class="color-swatch" style="background:${c}" data-party="${p.id}" data-index="${i}"></div>`).join('');const wrap=document.createElement('div');wrap.className='party-selector';wrap.innerHTML=`<div>${p.name}</div><div class="swatches">${sw}</div>`;toolbar.appendChild(wrap);wrap.querySelectorAll('.color-swatch').forEach(s=>{s.addEventListener('click',()=>{selectSwatch(p.id,parseInt(s.dataset.index))})})})
     }
-  
-    function rgbToHsl(rgb) {
-      let r = rgb.r / 255, g = rgb.g / 255, b = rgb.b / 255;
-      const max = Math.max(r, g, b), min = Math.min(r, g, b);
-      let h, s, l = (max + min) / 2;
-      if (max === min) { h = s = 0; }
-      else {
-        const d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-        switch (max) {
-          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-          case g: h = (b - r) / d + 2; break;
-          case b: h = (r - g) / d + 4; break;
-        }
-        h /= 6;
-      }
-      return { h: h * 360, s: s * 100, l: l * 100 };
-    }
-  
-    function hslToHex(h, s, l) {
-      l /= 100;
-      const a = s * Math.min(l, 1 - l) / 100;
-      const f = n => {
-        const k = (n + h / 30) % 12;
-        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-        return Math.round(255 * color).toString(16).padStart(2, '0');
-      };
-      return `#${f(0)}${f(8)}${f(4)}`;
-    }
-  
-    let selectedParty = null;
-    let selectedLevel = null;
-  
-    function initSwatches() {
-      const toolbar = document.getElementById('toolbar');
-      parties.forEach(party => {
-        party.levels = generateShades(party.base);
-        const swatchHTML = party.levels.map((color, i) =>
-          `<div class="color-swatch" style="background:${color}" data-party="${party.id}" data-index="${i}"></div>`
-        ).join('');
-        const partyEl = document.createElement('div');
-        partyEl.className = 'party-selector';
-        partyEl.innerHTML = `
-          <div style="margin-bottom:5px; font-weight:700;">${party.name}</div>
-          <div class="swatches">${swatchHTML}</div>
-        `;
-        toolbar.appendChild(partyEl);
-  
-        partyEl.querySelectorAll('.color-swatch').forEach(swatch => {
-          swatch.addEventListener('click', () => {
-            const level = parseInt(swatch.dataset.index);
-            selectSwatch(party.id, level);
-          });
-        });
-      });
-    }
-  
-    function selectSwatch(partyId, level) {
-      const removeBtn = document.getElementById('remove-color');
-      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+
+    function selectSwatch(partyId, level){
+      const removeBtn=document.getElementById('remove-color');
+      document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
       removeBtn.classList.remove('selected');
-      const swatch = document.querySelector(`.color-swatch[data-party="${partyId}"][data-index="${level}"]`);
-      if (swatch) swatch.classList.add('selected');
-      selectedParty = partyId;
-      selectedLevel = level;
+      const swatch=document.querySelector(`.color-swatch[data-party="${partyId}"][data-index="${level}"]`);
+      if(swatch) swatch.classList.add('selected');
+      selectedParty=partyId;selectedLevel=level;
     }
 
-
-function setupMap() {
-  const tooltip = document.getElementById('tooltip');
-
-  document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)').forEach(region => {
-    if (region.classList.contains('cls-3')) return;
-    region.style.cursor = 'pointer';
-
-    regionList = [...document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)')];
-
-    region.addEventListener('click', () => {
-      if (selectedParty && selectedLevel !== null) {
-        const party = parties.find(p => p.id === selectedParty);
-        region.style.fill = party.levels[selectedLevel];
-        region.setAttribute('data-party', selectedParty);
-        region.setAttribute('data-level', selectedLevel);
-        updateRegionList();
-        updateLegend();
-        updateURLState();
-
-      } else {
-        // remove fill
-        region.style.fill = null;
-        region.removeAttribute('data-party');
-        region.removeAttribute('data-level');
-        updateRegionList();
-        updateLegend();
-        updateURLState();
-      }
-    });
-
-    region.addEventListener('mouseenter', e => {
-  const regionName = region.id
-    .replace(/^_+/, '')
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, c => c.toUpperCase());
-
-  // Find nearest <g> ancestor that has an ID (excluding #regions)
-  let parent = region.parentElement;
-  let groupName = '';
-  while (parent && parent.tagName !== 'svg') {
-    if (parent.id && parent.id !== 'regions') {
-      groupName = parent.id
-        .replace(/^_+/, '')
-        .replace(/_/g, ' ')
-        .replace(/\b\w/g, c => c.toUpperCase());
-      break;
-    }
-    parent = parent.parentElement;
-  }
-
-  tooltip.innerHTML = groupName ? `<span style="font-weight: 400;">${groupName}</span> <span style="font-weight: 700;">${regionName}</span>` : regionName;
-  tooltip.style.opacity = 1;
-});
-
-    region.addEventListener('mousemove', e => {
-      tooltip.style.left = `${e.pageX + 10}px`;
-      tooltip.style.top = `${e.pageY + 10}px`;
-    });
-
-    region.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = 0;
-    });
-  });
-}
-
-function updateLegend() {
-const legend = document.getElementById('legend-wrapper');
-const existingItems = Array.from(legend.querySelectorAll('.legend-item'));
-  const usedParties = parties.filter(p =>
-    document.querySelector(`#regions path[data-party="${p.id}"], #regions polygon[data-party="${p.id}"], #regions polyline[data-party="${p.id}"], #regions rect[data-party="${p.id}"]`)
-  );
-
-  const newIds = usedParties.map(p => p.id);
-
-  // Remove items that are no longer used
-  existingItems.forEach(item => {
-    if (!newIds.includes(item.dataset.partyId)) {
-      item.style.transition = 'all 0.4s ease';
-item.style.height = item.offsetHeight + 'px'; // Freeze current height
-item.style.opacity = 1;
-item.style.marginBottom = getComputedStyle(item).marginBottom;
-
-requestAnimationFrame(() => {
-  item.style.height = '0px';
-  item.style.opacity = '0';
-  item.style.marginBottom = '0';
-  item.style.padding = '0';
-
-  setTimeout(() => {
-    if (item.parentElement) item.remove();
-  }, 400);
-}); // smooth fade-out
-    }
-  });
-
-  // Add or update items
-  usedParties.forEach((p, i) => {
-    let item = legend.querySelector(`.legend-item[data-party-id="${p.id}"]`);
-    const html = `
-      <div style="padding-bottom: 5px; font-weight: 600;">${p.name}</div>
-      ${p.levels.map((color, i) => `
-        <div><span class="legend-color" style="background:${color};"></span>${100-(i + 1)*10}
-      `).join('')}
-    `;
-
-    if (item) {
-      // If already exists, update content if needed
-      if (item.innerHTML !== html) {
-        item.innerHTML = html;
-      }
-    } else {
-      // Create new
-      item = document.createElement('div');
-      item.className = 'legend-item';
-      item.dataset.partyId = p.id;
-      item.innerHTML = html;
-      legend.appendChild(item);
-
-      // Animate in with slight delay (for ripple effect)
-      requestAnimationFrame(() => {
-    item.style.transition = 'all 0.6s ease';
-    item.style.opacity = '0'; // adjust if needed
-    item.style.paddingTop = '';
-    item.style.paddingBottom = ''
-    item.style.height = '0px';
-
-    item.style.opacity = '1';
-    item.style.height = item.scrollHeight + 'px';
-    item.classList.add('visible');
-
-
-  setTimeout(() => {
-  }, 400);
-}); // smooth fade-out
-    }
-  });
-}
-
-/*
-function updateLegend() {
-  const legend = document.getElementById('legend');
-  
-  // First clear legend
-  legend.innerHTML = '';
-
-  const usedPartyIds = new Set();
-  document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)').forEach(region => {
-    const party = region.getAttribute('data-party');
-    if (party) usedPartyIds.add(party);
-  });
-
-  const usedParties = parties.filter(p => usedPartyIds.has(p.id));
-
-  usedParties.forEach(p => {
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = `
-      <div style="padding-bottom: 5px; font-weight: 600;">${p.name}</div>
-      ${p.levels.map((color, i) => `
-        <div><span class="legend-color" style="background:${color};"></span>${100-(i + 1)*10}
-      `).join('')}
-    `;
-    legend.appendChild(item);
-
-    // Small timeout to trigger animation
-    setTimeout(() => {
-      item.classList.add('visible');
-    }, 10);
-  });
-}
-*/
-
-function setupRemoveButton() {
-  const removeBtn = document.getElementById('remove-color');
-  let pressTimer = null;
-
-  removeBtn.addEventListener('mousedown', startPress);
-  removeBtn.addEventListener('touchstart', startPress);
-  removeBtn.addEventListener('mouseup', cancelPress);
-  removeBtn.addEventListener('mouseleave', cancelPress);
-  removeBtn.addEventListener('touchend', cancelPress);
-  removeBtn.addEventListener('touchcancel', cancelPress);
-
-  function startPress(e) {
-    // prevent accidental triggers
-    if (pressTimer === null) {
-      pressTimer = setTimeout(() => {
-        const confirmReset = confirm('모든 색상을 제거하시겠습니까?');
-        if (confirmReset) {
-          document.querySelectorAll('#regions path, #regions polygon, #regions polyline, #regions rect').forEach(region => {
-            region.style.fill = null;
-            region.removeAttribute('data-party');
-            region.removeAttribute('data-level');
-          });
-          updateLegend();
-          updateRegionList();
-          updateURLState();
-        }
-      }, 1000); // Long press = 700ms
-    }
-  }
-
-  function cancelPress() {
-    if (pressTimer !== null) {
-      clearTimeout(pressTimer);
-      pressTimer = null;
-    }
-  }
-
-  // Regular tap = toggle remove mode
-  removeBtn.addEventListener('click', (e) => {
-    // Prevent conflict with long press
-    if (pressTimer !== null) {
-      clearTimeout(pressTimer);
-      pressTimer = null;
+    function setupMap(){
+      const tooltip=document.getElementById('tooltip');
+      document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)').forEach(region=>{
+        if(region.classList.contains('cls-3')) return; region.style.cursor='pointer';
+        regionList=[...document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)')];
+        region.addEventListener('click',()=>{
+          if(selectedParty && selectedLevel!==null){const p=parties.find(x=>x.id===selectedParty);region.style.fill=p.levels[selectedLevel];region.setAttribute('data-party',selectedParty);region.setAttribute('data-level',selectedLevel)}
+          else{region.style.fill=null;region.removeAttribute('data-party');region.removeAttribute('data-level')} updateRegionList();updateLegend();updateURLState();
+        });
+        region.addEventListener('mouseenter',e=>{
+          const regionName=region.id.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+          let parent=region.parentElement,groupName='';
+          while(parent && parent.tagName!=='svg'){if(parent.id && parent.id!=='regions'){groupName=parent.id.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());break} parent=parent.parentElement}
+          tooltip.innerHTML=groupName?`<span style="font-weight:400">${groupName}</span> <span style="font-weight:700">${regionName}</span>`:regionName; tooltip.style.opacity=1;
+        });
+        region.addEventListener('mousemove',e=>{tooltip.style.left=`${e.pageX+10}px`;tooltip.style.top=`${e.pageY+10}px`});
+        region.addEventListener('mouseleave',()=>{tooltip.style.opacity=0});
+      })
     }
 
-    const isActive = removeBtn.classList.toggle('selected');
-    if (isActive) {
-      selectedParty = null;
-      selectedLevel = null;
-      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
-    }
-  });
-}
-
-  
-function updateRegionList() {
-  const listContainer = document.getElementById('uncolored-regions');
-  listContainer.innerHTML = '';
-
-  const regions = document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)');
-
-  regions.forEach(region => {
-    const regionId = region.id;
-    const regionName = regionId
-      .replace(/^_+/, '')
-      .replace(/_/g, ' ')
-      .replace(/\b\w/g, c => c.toUpperCase());
-
-    let parent = region.parentElement;
-    let groupName = '';
-    while (parent && parent.tagName !== 'svg') {
-      if (parent.id && parent.id !== 'regions') {
-        groupName = parent.id
-          .replace(/^_+/, '')
-          .replace(/_/g, ' ')
-          .replace(/\b\w/g, c => c.toUpperCase());
-        break;
-      }
-      parent = parent.parentElement;
+    function updateLegend(){
+      const wrap=document.getElementById('legend-wrapper');
+      const existing=[...wrap.querySelectorAll('.legend-item')];
+      const used=parties.filter(p=>document.querySelector(`#regions [data-party="${p.id}"]`));
+      const newIds=used.map(p=>p.id);
+      existing.forEach(item=>{if(!newIds.includes(item.dataset.partyId)){item.style.transition='all .4s ease';item.style.height=item.offsetHeight+'px';item.style.opacity=1;item.style.marginBottom=getComputedStyle(item).marginBottom;requestAnimationFrame(()=>{item.style.height='0px';item.style.opacity='0';item.style.marginBottom='0';item.style.padding='0';setTimeout(()=>{item.parentElement&&item.remove()},400)})}});
+      used.forEach(p=>{let item=wrap.querySelector(`.legend-item[data-party-id="${p.id}"]`);const html=`<div style="padding-bottom:5px;font-weight:600;">${p.name}</div>${p.levels.map((c,i)=>`<div><span class='legend-color' style='background:${c}'></span>${100-(i+1)*10}`).join('')}`; if(item){if(item.innerHTML!==html){item.innerHTML=html}} else {item=document.createElement('div');item.className='legend-item';item.dataset.partyId=p.id;item.innerHTML=html;wrap.appendChild(item);requestAnimationFrame(()=>{item.style.transition='all .6s ease';item.style.height='0px';item.style.opacity='1';item.style.height=item.scrollHeight+'px';item.classList.add('visible')})}})
     }
 
-    const displayName = groupName
-      ? `<span style="font-weight: 400;">${groupName}</span> <span style="font-weight: 700;">${regionName}</span>`
-      : regionName;
-
-    const color = region.getAttribute('data-party') 
-      ? region.style.fill 
-      : '#b9b9b9';
-
-    const isColored = region.hasAttribute('data-party');
-
-    const listItem = document.createElement('div');
-    listItem.style.display = 'inline-flex';
-    listItem.style.alignItems = 'center';
-    listItem.style.padding = '6px 10px';
-    listItem.style.borderRadius = '6px';
-    listItem.style.whiteSpace = 'nowrap';
-    listItem.style.marginRight = '4px';
-
-
-    listItem.innerHTML = `
-<div class="region-circle" style="
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-    flex-shrink: 0;
-    background: ${isColored ? 'transparent' : color};
-    border: ${isColored ? `2px solid ${color}` : 'none'};
-    box-sizing: border-box;
-  "></div>
-  <div style="font-size: 15px; line-height: 1; letter-spacing: -0.04em;">${displayName}</div>
-    `;
-
-    // Hover effect
-    listItem.addEventListener('mouseenter', () => {
-      listItem.style.transition = 'all 0.2s ease';
-      listItem.style.backgroundColor = '#f0f0f0';
-      listItem.style.transition = 'none';
-    });
-    listItem.addEventListener('mouseleave', () => {
-      listItem.style.transition = 'all 0.2s ease';
-      listItem.style.backgroundColor = 'transparent';
-    });
-
-    // Click to apply color
-    listItem.addEventListener('click', () => {
-
-if (selectedParty !== null && selectedLevel !== null) {
-  const party = parties.find(p => p.id === selectedParty);
-  region.style.fill = party.levels[selectedLevel];
-  region.setAttribute('data-party', selectedParty);
-  region.setAttribute('data-level', selectedLevel);
-} else {
-  // If no color is selected (i.e. remove mode)
-  region.style.fill = null;
-  region.removeAttribute('data-party');
-  region.removeAttribute('data-level');
-}
-
-updateLegend();
-updateRegionList();
-updateURLState();
-    });
-
-    listContainer.appendChild(listItem);
-      listItem.style.color = isColored ? '#bbb' : '#333';
-  });
-}
-
-
-
-
-    function init() {
-      initSwatches();
-      setupMap();
-      updateLegend();
-      selectSwatch('party1', 2);
-      setupRemoveButton();
-      updateRegionList();
+    function setupRemoveButton(){
+      const btn=document.getElementById('remove-color'); let t=null;
+      const start=()=>{if(t===null){t=setTimeout(()=>{if(confirm('모든 색상을 제거하시겠습니까?')){document.querySelectorAll('#regions path, #regions polygon, #regions polyline, #regions rect').forEach(r=>{r.style.fill=null;r.removeAttribute('data-party');r.removeAttribute('data-level')});updateLegend();updateRegionList();updateURLState()}},1000)}};
+      const end=()=>{if(t!==null){clearTimeout(t);t=null}};
+      btn.addEventListener('mousedown',start);btn.addEventListener('touchstart',start);btn.addEventListener('mouseup',end);btn.addEventListener('mouseleave',end);btn.addEventListener('touchend',end);btn.addEventListener('touchcancel',end);
+      btn.addEventListener('click',()=>{if(t!==null){clearTimeout(t);t=null} const active=btn.classList.toggle('selected'); if(active){selectedParty=null;selectedLevel=null;document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'))}})
     }
 
-const toolbar = document.getElementById('toolbar');
-const scrollLeftBtn = document.getElementById('scroll-left');
-const scrollRightBtn = document.getElementById('scroll-right');
-    
-    let isScrolling = false;
+    function updateRegionList(){
+      const list=document.getElementById('uncolored-regions'); list.innerHTML='';
+      const regions=document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)');
+      regions.forEach(region=>{
+        const regionId=region.id; const regionName=regionId.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+        let parent=region.parentElement,groupName=''; while(parent && parent.tagName!=='svg'){ if(parent.id && parent.id!=='regions'){ groupName=parent.id.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()); break } parent=parent.parentElement }
+        const displayName=groupName?`<span style='font-weight:400'>${groupName}</span> <span style='font-weight:700'>${regionName}</span>`:regionName;
+        const color=region.getAttribute('data-party')?region.style.fill:'#b9b9b9'; const isColored=region.hasAttribute('data-party');
+        const el=document.createElement('div'); el.style.display='inline-flex'; el.style.alignItems='center'; el.style.padding='6px 10px'; el.style.borderRadius='8px'; el.style.whiteSpace='nowrap'; el.style.marginRight='6px'; el.style.background='transparent'; el.style.border='1px dashed rgba(255,255,255,.09)'; el.style.color=isColored?'#9aa4cc':'#eaf0ff';
+        el.innerHTML=`<div class='region-circle' style='width:10px;height:10px;border-radius:50%;margin-right:6px;flex-shrink:0;background:${isColored?'transparent':color};border:${isColored?`2px solid ${color}`:'none'};box-sizing:border-box'></div><div style='font-size:14px;line-height:1;letter-spacing:-.02em'>${displayName}</div>`;
+        el.addEventListener('mouseenter',()=>{el.style.background='rgba(255,255,255,.06)'}); el.addEventListener('mouseleave',()=>{el.style.background='transparent'});
+        el.addEventListener('click',()=>{ if(selectedParty!==null && selectedLevel!==null){const p=parties.find(x=>x.id===selectedParty); region.style.fill=p.levels[selectedLevel]; region.setAttribute('data-party',selectedParty); region.setAttribute('data-level',selectedLevel)} else {region.style.fill=null; region.removeAttribute('data-party'); region.removeAttribute('data-level')} updateLegend(); updateRegionList(); updateURLState(); });
+        list.appendChild(el);
+      })
+    }
 
-function scrollLegendBy(offset) {
-  if (isScrolling) return;
+    const toolbarEl=document.getElementById('toolbar');
+    document.getElementById('scroll-left').addEventListener('click',()=>toolbarEl.scrollBy({left:-300,behavior:'smooth'}));
+    document.getElementById('scroll-right').addEventListener('click',()=>toolbarEl.scrollBy({left:300,behavior:'smooth'}));
 
-  const container = document.getElementById('legend-scroll');
-  isScrolling = true;
+    function downloadSVGAsPNG(scale=2){
+      const svg=document.getElementById('map'); const clone=svg.cloneNode(true); const vb=svg.viewBox.baseVal; const w=vb.width, h=vb.height; clone.setAttribute('width',w); clone.setAttribute('height',h); const ser=new XMLSerializer(); const str=ser.serializeToString(clone); const blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'}); const url=URL.createObjectURL(blob); const img=new Image(); img.onload=function(){const can=document.createElement('canvas');can.width=w*scale;can.height=h*scale;const ctx=can.getContext('2d');ctx.setTransform(scale,0,0,scale,0,0);ctx.drawImage(img,0,0);can.toBlob(function(b){const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='download.png';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)},'image/png'); URL.revokeObjectURL(url)}; img.src=url
+    }
 
-  container.scrollBy({ left: offset, behavior: 'smooth' });
-
-  // Re-enable after scroll ends (approx 400ms)
-  setTimeout(() => {
-    isScrolling = false;
-  }, 400);
-}
-
-scrollLeftBtn.addEventListener('click', () => toolbar.scrollBy({ left: -300, behavior: 'smooth' }));
-scrollRightBtn.addEventListener('click', () => toolbar.scrollBy({ left: 300, behavior: 'smooth' }));
-    
-
-    function downloadSVGAsPNG(scale = 2) {
-  const svgElement = document.getElementById("map");
-  const clone = svgElement.cloneNode(true);
-  const viewBox = svgElement.viewBox.baseVal;
-
-  // Set width and height explicitly on the clone
-  const width = viewBox.width;
-  const height = viewBox.height;
-  clone.setAttribute("width", width);
-  clone.setAttribute("height", height);
-
-  const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(clone);
-
-  const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(svgBlob);
-
-  const img = new Image();
-  img.onload = function () {
-    const canvas = document.createElement("canvas");
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-
-    const ctx = canvas.getContext("2d");
-    ctx.setTransform(scale, 0, 0, scale, 0, 0); // Scale context
-    ctx.drawImage(img, 0, 0);
-
-    canvas.toBlob(function(blob) {
-      const pngUrl = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = pngUrl;
-      link.download = "download.png";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(pngUrl);
-    }, "image/png");
-
-    URL.revokeObjectURL(url);
-  };
-  img.src = url;
-}
-
-    const modeContainer = document.getElementById('innermap');
-
-const modeContent = {
+    const modeContainer=document.getElementById('innermap');
+        const modeContent = {
   a: () => {
         return `  <defs>
     <style>
@@ -1912,114 +1046,29 @@ const modeContent = {
   }
 };
     
-function updateMode(value) {
-  modeContainer.innerHTML = ''; // remove existing
-  modeContainer.innerHTML = (modeContent[value]());
-}
+    function updateMode(v){modeContainer.innerHTML=''; modeContainer.innerHTML=(modeContent[v]())}
 
-function maybeShowTutorial() {
-  const shownBefore = localStorage.getItem('lktn_tutorial_shown');
-  if (!shownBefore) {
-    document.getElementById('tutorial-overlay').style.display = 'flex';
-  }
-
-  document.getElementById('tutorial-close').addEventListener('click', () => {
-    localStorage.setItem('lktn_tutorial_shown', 'true');
-    document.getElementById('tutorial-overlay').style.opacity = '0';
-    setTimeout(() => {
-      document.getElementById('tutorial-overlay').style.display = 'none';
-    }, 500);
-  });
-}
-
-
-function updateURLState() {
-  const colored = regionList.map((el, i) => {
-  const party = el.getAttribute('data-party');
-  const level = el.getAttribute('data-level');
-  if (party && level !== null) {
-    const partyIdx = parties.findIndex(p => p.id === party);
-    return `${i.toString(36)}_${partyIdx.toString(36)}_${parseInt(level).toString(36)}`;
-  }
-  return null;
-}).filter(Boolean);
-
-const encoded = btoa(colored.join('|'));
-
-  const selectedParam = selectedParty !== null
-    ? btoa(`${parties.findIndex(p => p.id === selectedParty).toString(36)}${selectedLevel.toString(36)}`)
-    : '';
-
-  const modeVal = document.getElementById('mode-select').value;
-  const newUrl = `${location.pathname}?r=${encoded}${selectedParam ? `&s=${selectedParam}` : ''}&d=${modeVal}`;
-  history.replaceState(null, '', newUrl);
-}
-
-
-
-function loadURLState() {
-  const params = new URLSearchParams(window.location.search);
-
-  const d = params.get('d');
-  if (d !== null) {
-    document.getElementById('mode-select').value = d;
-  }
-
-  const s = params.get('s');
-  if (s) {
-    try {
-      const raw = atob(s);
-      const partyIdx = parseInt(raw[0], 36);
-      const level = parseInt(raw[1], 36);
-      if (!isNaN(partyIdx) && !isNaN(level)) {
-        selectSwatch(parties[partyIdx].id, level);
-      }
-    } catch (e) {
-      console.warn('Invalid swatch state');
+    function updateURLState(){
+      const colored=regionList.map((el,i)=>{const party=el.getAttribute('data-party'); const level=el.getAttribute('data-level'); if(party && level!==null){const pi=parties.findIndex(p=>p.id===party); return `${i.toString(36)}_${pi.toString(36)}_${parseInt(level).toString(36)}`} return null}).filter(Boolean);
+      const encoded=btoa(colored.join('|'));
+      const selectedParam=selectedParty!==null?btoa(`${parties.findIndex(p=>p.id===selectedParty).toString(36)}${selectedLevel.toString(36)}`):'';
+      const modeVal=document.getElementById('mode-select').value;
+      const newUrl=`${location.pathname}?r=${encoded}${selectedParam?`&s=${selectedParam}`:''}&d=${modeVal}`; history.replaceState(null,'',newUrl)
     }
-  }
 
-  const r = params.get('r');
-if (r) {
-  try {
-    const decoded = atob(r).split('|');
-    decoded.forEach(code => {
-      const [regionCode, partyCode, levelCode] = code.split('_');
-      const regionIdx = parseInt(regionCode, 36);
-      const partyIdx = parseInt(partyCode, 36);
-      const level = parseInt(levelCode, 36);
-
-      const el = regionList[regionIdx];
-      if (el && parties[partyIdx] && parties[partyIdx].levels[level]) {
-        el.style.fill = parties[partyIdx].levels[level];
-        el.setAttribute('data-party', parties[partyIdx].id);
-        el.setAttribute('data-level', level);
-      }
-    });
-  } catch (e) {
-    console.warn('Failed to decode region state', e);
+    function loadURLState(){
+      const params=new URLSearchParams(window.location.search); const d=params.get('d'); if(d!==null){document.getElementById('mode-select').value=d}
+      const s=params.get('s'); if(s){try{const raw=atob(s); const pi=parseInt(raw[0],36); const lv=parseInt(raw[1],36); if(!isNaN(pi)&&!isNaN(lv)){selectSwatch(parties[pi].id,lv)}}catch(e){console.warn('Invalid swatch state')}}
+      const r=params.get('r'); if(r){try{const dec=atob(r).split('|'); dec.forEach(code=>{const [rc,pc,lc]=code.split('_'); const ri=parseInt(rc,36), pi=parseInt(pc,36), lv=parseInt(lc,36); const el=regionList[ri]; if(el && parties[pi] && parties[pi].levels[lv]){el.style.fill=parties[pi].levels[lv]; el.setAttribute('data-party',parties[pi].id); el.setAttribute('data-level',lv)}})}catch(e){console.warn('Failed to decode region state',e)}}
     }
-  }
-}
 
+    document.getElementById('mode-select').addEventListener('change',e=>{updateURLState(); updateMode(e.target.value); setupMap(); updateLegend(); updateRegionList()});
 
+    function maybeShowTutorial(){const shown=localStorage.getItem('lktn_tutorial_shown'); if(!shown){document.getElementById('tutorial-overlay').style.display='flex'} document.getElementById('tutorial-close').addEventListener('click',()=>{localStorage.setItem('lktn_tutorial_shown','true'); const ov=document.getElementById('tutorial-overlay'); ov.style.opacity='0'; setTimeout(()=>{ov.style.display='none'},500)})}
 
-document.getElementById('mode-select').addEventListener('change', e => {
-  updateURLState();
-  updateMode(e.target.value);
-  setupMap();
-  updateLegend();
-  updateRegionList();
-});
-
-// Optional: initialize with default
-    loadURLState();
-    updateMode(document.getElementById('mode-select').value);
-    init();
-    loadURLState();
-    updateLegend();
-    updateRegionList();
-    maybeShowTutorial();
+    // Init
+    loadURLState(); updateMode(document.getElementById('mode-select').value);
+    initSwatches(); setupMap(); updateLegend(); selectSwatch('party1',2); setupRemoveButton(); updateRegionList(); maybeShowTutorial(); loadURLState(); updateLegend(); updateRegionList();
   </script>
 </body>
 </html>
