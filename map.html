@@ -84,7 +84,7 @@
     /* -------------------- Toolbar -------------------- */
     #toolbar-wrapper{position:relative;display:flex;align-items:center;overflow:hidden;margin:16px auto;width:var(--maxw)}
     #toolbar-inside-wrapper{display:flex;align-items:center;max-width:100%;gap:10px}
-    #toolbar{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:14px 16px;background:var(--card);backdrop-filter:blur(10px);border-radius:14px;border:1px solid var(--stroke);box-shadow:var(--glow);scrollbar-width:none;width:640px;margin:0 10px}
+    #toolbar{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:14px 22px;background:var(--card);backdrop-filter:blur(10px);border-radius:14px;border:1px solid var(--stroke);box-shadow:var(--glow);scrollbar-width:none;width:640px;margin:0 10px}
     #toolbar::-webkit-scrollbar{display:none}
     .scroll-button{background:var(--card);border:1px solid var(--stroke);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#e6ecff}
     .scroll-button:hover{filter:brightness(1.12)}
@@ -124,7 +124,7 @@
     #uncolored-regions::-webkit-scrollbar{display:none}
 
     /* -------------------- Tooltip -------------------- */
-    #tooltip{position:absolute;background:#1a2146;color:#fff;padding:6px 10px;font-size:14px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .1s ease;z-index:1000;border:1px solid var(--stroke)}
+    #tooltip{position:absolute;background:#1a2146;color:#fff;padding:6px 10px;font-size:15px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .1s ease;z-index:1000;border:1px solid var(--stroke)}
 
     /* -------------------- Responsive -------------------- */
     @media (max-width:1000px){
@@ -290,7 +290,7 @@
         const displayName=groupName?`<span style='font-weight:400'>${groupName}</span> <span style='font-weight:700'>${regionName}</span>`:regionName;
         const color=region.getAttribute('data-party')?region.style.fill:'#b9b9b9'; const isColored=region.hasAttribute('data-party');
         const el=document.createElement('div'); el.style.display='inline-flex'; el.style.alignItems='center'; el.style.padding='6px 10px'; el.style.borderRadius='8px'; el.style.whiteSpace='nowrap'; el.style.marginRight='6px'; el.style.background='transparent'; el.style.border='1px dashed rgba(255,255,255,.09)'; el.style.color=isColored?'#9aa4cc':'#eaf0ff';
-        el.innerHTML=`<div class='region-circle' style='width:10px;height:10px;border-radius:50%;margin-right:6px;flex-shrink:0;background:${isColored?'transparent':color};border:${isColored?`2px solid ${color}`:'none'};box-sizing:border-box'></div><div style='font-size:14px;line-height:1;letter-spacing:-.02em'>${displayName}</div>`;
+        el.innerHTML=`<div class='region-circle' style='width:10px;height:10px;border-radius:50%;margin-right:6px;flex-shrink:0;background:${isColored?'transparent':color};border:${isColored?`2px solid ${color}`:'none'};box-sizing:border-box'></div><div style='font-size:15px;line-height:1;letter-spacing:-.02em'>${displayName}</div>`;
         el.addEventListener('mouseenter',()=>{el.style.background='rgba(255,255,255,.06)'}); el.addEventListener('mouseleave',()=>{el.style.background='transparent'});
         el.addEventListener('click',()=>{ if(selectedParty!==null && selectedLevel!==null){const p=parties.find(x=>x.id===selectedParty); region.style.fill=p.levels[selectedLevel]; region.setAttribute('data-party',selectedParty); region.setAttribute('data-level',selectedLevel)} else {region.style.fill=null; region.removeAttribute('data-party'); region.removeAttribute('data-level')} updateLegend(); updateRegionList(); updateURLState(); });
         list.appendChild(el);
