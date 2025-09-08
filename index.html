@@ -164,19 +164,25 @@ footer a{color:#d6deff;text-decoration:none}
         <div class="card-icon">🔗</div>
         <div class="card-title">단축 링크 신청하기</div>
         <div class="card-desc">시민사회단체와 활동가에게<br>영구적인 단축 링크를 제공합니다.</div>
-        <span class="chip">준비중중</span>
+        <span class="chip">준비 중</span>
       </a>
       <a href="/map" class="card" role="listitem">
         <div class="card-icon">🗺️</div>
         <div class="card-title">정치 지도 생성기</div>
         <div class="card-desc">선거 지도를 직접 색칠하며 <br>나만의 분석을 해보세요.</div>
-        <span class="chip">베타 운영중</span>
+        <span class="chip">베타 운영 중</span>
+      </a>
+      <a href="" class="card" role="listitem" aria-disabled="true" onclick="event.preventDefault();">
+        <div class="card-icon">✅</div>
+        <div class="card-title">국민청원 모음</div>
+        <div class="card-desc">각 의제에 대한 국민청원을<br>한눈에 모아 볼 수 있습니다.</div>
+        <span class="chip">준비 중</span>
       </a>
       <a href="" class="card" role="listitem" aria-disabled="true" onclick="event.preventDefault();">
         <div class="card-icon">👤</div>
         <div class="card-title">정치인 정보</div>
         <div class="card-desc">COMING SOON <br>현재 명부 작성 중입니다.</div>
-        <span class="chip">준비중</span>
+        <span class="chip">준비 중</span>
       </a>
       <a href="" class="card" role="listitem" aria-disabled="true" onclick="event.preventDefault();">
         <div class="card-icon">📊</div>
@@ -195,19 +201,15 @@ footer a{color:#d6deff;text-decoration:none}
     <!-- ===== Info Row ===== -->
     <div class="info-row">
       <section class="panel" aria-labelledby="p-news">
-        <h3 id="p-news">록탄 소식</h3>
+        <h3 id="p-news">록탄 안내</h3>
         <div class="list">
           <div class="list-item">
-            <b>🆕 지도 생성기 성능 개선</b>
-            <span>도 색칠/리셋이 더 빨라졌어요. PNG 저장 품질도 향상!</span>
-          </div>
-          <div class="list-item">
-            <b>👥 정치인/정당 섹션 제작중</b>
-            <span>명부·프로필 스키마 설계 및 데이터 수집 중입니다.</span>
+            <b>✅ 참여단체 모집</b>
+            <span>국민청원·정책 등 안내에 각 의제별로 참여할 단체를 모집합니다.</span>
           </div>
           <div class="list-item">
             <b>🤝 기여자 모집</b>
-            <span>프론트엔드/데이터 정제/리서치에 관심있는 분들의 참여를 기다립니다.</span>
+            <span>정치에 관심있는 분들의 참여를 기다립니다.</span>
           </div>
         </div>
       </section>
@@ -223,10 +225,9 @@ footer a{color:#d6deff;text-decoration:none}
   </main>
 
   <footer>
-    <div>© <span id="y"></span> LKTN. 데이터로 더 나은 공론장을 만듭니다.</div>
+    <div>© 2024-<span id="y"></span>록탄. </div>
     <div>
       <a href="https://x.com/lktn_kr" target="_blank" rel="noopener">X(트위터)</a> ·
-      <a href="mailto:team@lktn.kr">team@lktn.kr</a>
     </div>
   </footer>
 
