@@ -133,7 +133,6 @@
       .scroll-button{display:none}
       #map{padding:14px}
       #legend{opacity:0;pointer-events:none}
-      #uncolored-regions-list{padding:12px 14px}
     }
     @media (max-width:750px){#save-png-button{margin-right:8px}}
   </style>
@@ -205,7 +204,7 @@
     <h2>목록으로 색칠하기</h2>
     <div id="uncolored-regions"></div>
   </div>
-
+  <div style="height: 30px;"></div>
   <!-- Scripts: 기존 로직 대부분 유지 (DOM id/class 변경 없음) -->
   <script>
     let regionList = [];
@@ -214,7 +213,7 @@
       { id:'party2', name:'국민의힘', base:'#E61E2B', levels:[] },
       { id:'party3', name:'개혁신당', base:'#FF7210', levels:[] },
       { id:'party4', name:'진보당', base:'#d60072', levels:[] },
-      { id:'party5', name:'민주노동당', base:'#f6b93b', levels:[] },
+      { id:'party5', name:'정의당', base:'#f6b93b', levels:[] },
       { id:'party7', name:'새미래민주당', base:'#59afb5', levels:[] },
       { id:'party8', name:'기본소득당', base:'#00D2C3', levels:[] },
       { id:'party9', name:'조국혁신당', base:'#2188bf', levels:[] },
