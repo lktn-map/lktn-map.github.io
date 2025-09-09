@@ -82,7 +82,7 @@ body{margin:0;font-family:'PyeojinGothic',system-ui,-apple-system,Segoe UI,Robot
 .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
 .badge{font-family:'PyeojinGothic',sans-serif;background:rgba(255,255,255,.09);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);color:#dbe2ff;padding:6px 12px;border-radius:999px;font-size:14px;letter-spacing:.2px}
 .hero h1{margin:20px 0 6px;font-size:clamp(28px,4.2vw,44px);line-height:1.18;font-family:'PyeojinGothic',sans-serif;letter-spacing:.3px;text-shadow:0 2px 14px rgba(0,0,0,.25)}
-.hero p{margin:9px 0 22px;color:var(--muted);font-size: clamp(13px,1.7vw,17px);font-family:'PyeojinGothic',sans-serif;line-height:1.4}
+.hero p{margin:9px 0 22px;color:var(--muted);font-size: clamp(13px,1.7vw,17px);font-family:'PyeojinGothic',sans-serif;line-height:1.4;word-break:keep-all;}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding: 8px 12px;border-radius:12px;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
 .btn-primary{background:linear-gradient(180deg, rgba(110,255,168,.9), rgba(110,255,168,.65));color:#0b1020;box-shadow:0 10px 24px rgba(110,255,168,.2)}
@@ -93,7 +93,7 @@ body{margin:0;font-family:'PyeojinGothic',system-ui,-apple-system,Segoe UI,Robot
 /* -------------------- Feature Grid -------------------- */
 .section-title{margin:36px 0 16px;font-size:20px;color:#dbe2ff;letter-spacing:.2px}
 .menu-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-.card{grid-column:span 4;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:22px;box-shadow:0 6px 24px rgba(0,0,0,.25);position:relative;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.card{grid-column:span 4;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:22px 22px 18px;box-shadow:0 6px 24px rgba(0,0,0,.25);position:relative;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
 .card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.35);border-color:rgba(110,255,168,.45)}
 .card::after{content:"";position:absolute;inset:auto auto -60px -60px;width:160px;height:160px;background:radial-gradient(closest-side, rgba(110,255,168,.35), transparent 70%);transform:rotate(15deg)}
 .card-icon{font-size:28px;margin-bottom:10px}
@@ -109,7 +109,7 @@ body{margin:0;font-family:'PyeojinGothic',system-ui,-apple-system,Segoe UI,Robot
 .panel h3{margin:0 0 10px;font-size:16px}
 .list{display:grid;gap:10px}
 .list-item{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:12px;border:1px dashed rgba(255,255,255,.08)}
-.list-item b{font-size:15px}
+.list-item b{font-size:15px;font-size: 15px;min-width: 80px;word-break: keep-all;text-align: center;margin-top: auto;margin-bottom: auto;margin-left: 5px;}
 .list-item span{font-family:'PyeojinGothic',sans-serif;color:#c6ccef;font-size:14px;margin-top: 1.5px;}
 @media (max-width:900px){.info-row{grid-template-columns:1fr}}
 
@@ -221,13 +221,12 @@ footer a{color:#d6deff;text-decoration:none}
     </div>
 
     <!-- ===== Comments ===== -->
-    <div id="disqus_thread" style="box-sizing:border-box;max-width:var(--maxw);margin:24px auto 0;"></div>
   </main>
 
   <footer>
-    <div>© 2024-<span id="y"></span>록탄. </div>
+    <div>© 2024-<span id="y"></span> 록탄. All rights reserved.</div>
     <div>
-      <a href="https://x.com/lktn_kr" target="_blank" rel="noopener">X(트위터)</a> ·
+      <a href="https://x.com/lktn_kr" target="_blank" rel="noopener">X(트위터)</a>
     </div>
   </footer>
 
