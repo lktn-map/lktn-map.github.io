@@ -89,8 +89,8 @@
     .scroll-button{background:var(--card);border:1px solid var(--stroke);border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#e6ecff}
     .scroll-button:hover{filter:brightness(1.12)}
 
-    .party-selector{scroll-snap-align:end;flex:0 0 auto;display:flex;padding-right:26px;flex-direction:column;align-items:center;min-width:140px}
-    .party-selector>div:first-child{margin-bottom:6px;font-weight:700;color:#eaf0ff}
+    .party-selector{scroll-snap-align:end;flex:0 0 auto;display:flex;padding-right:26px;flex-direction:column;align-items:center;min-width:140px;padding-top: 3px;}
+    .party-selector>div:first-child{margin-bottom:6px;font-weight:700;color:#eaf0ff;display:flex;align-items:center;gap:6px}
     .swatches{display:flex;gap:4px}
     .color-swatch{display:inline-block;width:22px;height:26px;cursor:pointer;border-radius:6px;border:1px solid rgba(255,255,255,.18);box-shadow:0 1px 5px rgba(0,0,0,.25);transition:transform .1s ease, box-shadow .2s;}
     .color-swatch.selected{box-shadow:0 0 0 3px rgba(255,255,255,.3), 0 6px 18px rgba(0,0,0,.35);transform:scale(1.06)}
@@ -100,6 +100,15 @@
     #remove-color{width:60px;height:40px;background:var(--warn);box-shadow:0 6px 16px rgba(255,77,79,.35)}
     #remove-color.selected{outline:2px solid rgba(255,77,79,.5);box-shadow:0 0 0 3px rgba(255,77,79,.35) inset}
     #save-png-button{width:60px;height:40px;background:var(--ok);margin-left:6px;margin-right:24px;box-shadow:0 6px 16px rgba(0,198,144,.35)}
+
+    /* ---- Custom Color Controls ---- */
+    #custom-controls{display:flex;align-items:center;gap:8px;background:var(--card);border:1px dashed var(--stroke);padding:10px 12px;border-radius:12px;flex:0 0 auto;margin-right:12px;scroll-snap-align:end;}
+    #custom-hex{background:#0b1020;color:#e7ecff;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 10px;font-size:14px;max-width:100px}
+    #add-custom{background:var(--primary);color:#041018;border:none;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+    #add-custom:hover{filter:brightness(1.08)}
+    #clear-custom{background:transparent;border:1px solid rgba(255,255,255,.18);color:#cfd7ff;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+    .mini-btn{background:transparent;border:1px solid rgba(255,255,255,.18);color:#cfd7ff;border-radius:8px;padding:1px 6px;font-size:12px;cursor:pointer;transition: background 0.2s;}
+    .mini-btn:hover{background:rgba(255,77,79,.5);border:1px solid rgba(212, 102, 102, 0.18);color:#cfd7ff;border-radius:8px;padding:1px 6px;font-size:12px;cursor:pointer;transition: background 0.2s;}
 
     /* -------------------- Map & Legend -------------------- */
     #map-container{position:relative;max-width:var(--maxw);margin:0 auto}
@@ -133,6 +142,7 @@
       .scroll-button{display:none}
       #map{padding:14px}
       #legend{opacity:0;pointer-events:none}
+      #custom-controls{display:flex;flex-wrap:wrap}
     }
     @media (max-width:750px){#save-png-button{margin-right:8px}}
   </style>
@@ -144,15 +154,15 @@
   <!-- Tutorial Overlay -->
   <div id="tutorial-overlay">
     <div class="panel">
-      <h1>록탄 지도<span style="font-size:.8em;font-weight:400">(v1.5.0)</span> 사용 안내</h1>
-      <p style="font-size:15px;margin:0 0 12px">정당 색상을 선택해 지도나 하단 목록을 클릭해 보세요. 모바일에서는 색상 목록을 스크롤할 수 있습니다.<br>색상 제거 버튼을 길게 누르거나 <b>Shift</b>와 함께 누르면 전체 초기화됩니다.</p>
+      <h1>록탄 지도<span style="font-size:.8em;font-weight:400">(v1.6.0)</span> 사용 안내</h1>
+      <p style="font-size:15px;margin:0 0 12px">정당 또는 커스텀 색상을 선택해 지도나 하단 목록을 클릭해 보세요. 모바일에서는 색상 목록을 스크롤할 수 있습니다.<br>색상 제거 버튼을 길게 누르거나 <b>Shift</b>와 함께 누르면 전체 초기화됩니다.</p>
       <p style="font-size:13px;opacity:.7;margin:0">처음 한 번만 표시됩니다.</p>
       <button id="tutorial-close">시작하기</button>
     </div>
   </div>
 
   <!-- Topbar (원본 구조 유지) -->
-      <header id="topbar">
+  <header id="topbar">
     <div class="topbar-left"><a href="/" style="margin:0"><img class="logo" style="width:60px; padding-top: 4px; padding-left: 4px;" src="/icon.png" alt="록탄"></a></div>
     <nav class="topbar-links">
       <a href="/link">단축링크</a>
@@ -178,10 +188,22 @@
       <button id="save-png-button" onclick="downloadSVGAsPNG()" title="PNG로 저장">
         <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="Complete"><g id="download"><g><path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7" fill="none" stroke="#0b1020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><g><polyline data-name="Right" fill="none" id="Right-2" points="7.9 12.3 12 16.3 16.1 12.3" stroke="#0b1020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line fill="none" stroke="#0b1020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="2.7" y2="14.2"/></g></g></g></svg>
       </button>
+
+      <!-- Custom color controls -->
       <button id="scroll-left" class="scroll-button" aria-label="Scroll left">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div id="toolbar"></div>
+      <div id="toolbar">
+        <!-- Custom color controls INSIDE scroll -->
+        <div id="custom-controls" title="커스텀 색상 추가/삭제" style="padding-left:15px;">
+          <input id="custom-picker" type="color" value="#FF0000" style="border-radius: 11px;background: #0b1020;color: #e7ecff;border: 1px solid rgba(255,255,255,.12);padding: 0;width: 32px;" aria-label="색상 선택기" />
+          <input id="custom-hex" type="text" value="#FF0000" placeholder="#RRGGBB" maxlength="7" />
+          <button id="add-custom">추가</button>
+          <button id="clear-custom" title="모든 커스텀 팔레트 삭제">전체 삭제</button>
+        </div>
+        <!-- Swatch groups render here -->
+        <div id="palette-strip" style="display: flex; flex-direction: row; margin-left: 15px;"></div>
+      </div>
       <button id="scroll-right" class="scroll-button" aria-label="Scroll right">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -208,18 +230,18 @@
   <!-- Scripts: 기존 로직 대부분 유지 (DOM id/class 변경 없음) -->
   <script>
     let regionList = [];
-    const parties = [
-      { id:'party1', name:'더불어민주당', base:'#3546b5', levels:[] },
-      { id:'party2', name:'국민의힘', base:'#E61E2B', levels:[] },
-      { id:'party3', name:'개혁신당', base:'#FF7210', levels:[] },
-      { id:'party4', name:'진보당', base:'#d60072', levels:[] },
-      { id:'party5', name:'정의당', base:'#f6b93b', levels:[] },
-      { id:'party7', name:'새미래민주당', base:'#59afb5', levels:[] },
-      { id:'party8', name:'기본소득당', base:'#00D2C3', levels:[] },
-      { id:'party9', name:'조국혁신당', base:'#2188bf', levels:[] },
-      { id:'party10', name:'자유통일당', base:'#4371a3', levels:[] },
-      { id:'party11', name:'무소속', base:'#808080', levels:[] },
+    const builtInParties = [
+      { id:'party1', name:'더불어민주당', base:'#3546b5', levels:[], isCustom:false },
+      { id:'party2', name:'국민의힘', base:'#E61E2B', levels:[], isCustom:false },
+      { id:'party3', name:'개혁신당', base:'#FF7210', levels:[], isCustom:false },
+      { id:'party4', name:'진보당', base:'#d60072', levels:[], isCustom:false },
+      { id:'party5', name:'정의당', base:'#f6b93b', levels:[], isCustom:false },
+      { id:'party9', name:'조국혁신당', base:'#2188bf', levels:[], isCustom:false },
+      { id:'party11', name:'무소속', base:'#808080', levels:[], isCustom:false },
     ];
+
+    // This will hold both built-ins and customs (in that order)
+    let parties = [];
 
     function clamp(v,min,max){return Math.min(Math.max(v,min),max)}
     function hexToRgb(hex){const r=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);return r?{r:parseInt(r[1],16),g:parseInt(r[2],16),b:parseInt(r[3],16)}:null}
@@ -229,9 +251,36 @@
 
     let selectedParty=null, selectedLevel=null;
 
+    function renderSwatches(){
+      const strip=document.getElementById('palette-strip');
+      strip.innerHTML='';
+      parties.forEach(p=>{
+        if(!p.levels || p.levels.length===0) p.levels = generateShades(p.base);
+        const sw=p.levels.map((c,i)=>`<div class="color-swatch" style="background:${c}" data-party="${p.id}" data-index="${i}"></div>`).join('');
+        const wrap=document.createElement('div');
+        wrap.className='party-selector';
+        const removable = p.isCustom ? `<button class="mini-btn" data-remove="${p.id}" title="이 팔레트 삭제">삭제</button>` : '';
+        const label = p.isCustom ? `커스텀 (${p.base.toUpperCase()})` : p.name;
+        wrap.innerHTML=`<div>${label} ${removable}</div><div class="swatches">${sw}</div>`;
+        strip.appendChild(wrap);
+        // swatch click
+        wrap.querySelectorAll('.color-swatch').forEach(s=>{
+          s.addEventListener('click',()=>{selectSwatch(p.id,parseInt(s.dataset.index))})
+        })
+        // remove custom palette
+        if(p.isCustom){
+          const btn=wrap.querySelector(`[data-remove="${p.id}"]`);
+          btn.addEventListener('click',()=>removeCustomPalette(p.id));
+        }
+      })
+    }
+
     function initSwatches(){
-      const toolbar=document.getElementById('toolbar');
-      parties.forEach(p=>{p.levels=generateShades(p.base);const sw=p.levels.map((c,i)=>`<div class="color-swatch" style="background:${c}" data-party="${p.id}" data-index="${i}"></div>`).join('');const wrap=document.createElement('div');wrap.className='party-selector';wrap.innerHTML=`<div>${p.name}</div><div class="swatches">${sw}</div>`;toolbar.appendChild(wrap);wrap.querySelectorAll('.color-swatch').forEach(s=>{s.addEventListener('click',()=>{selectSwatch(p.id,parseInt(s.dataset.index))})})})
+      parties = [...builtInParties.map(p=>({...p}))];
+      // Load customs from URL/localStorage
+      const restored = getCustomsFromState();
+      restored.forEach(hex=> addCustomColor(hex,false));
+      renderSwatches();
     }
 
     function selectSwatch(partyId, level){
@@ -241,6 +290,7 @@
       const swatch=document.querySelector(`.color-swatch[data-party="${partyId}"][data-index="${level}"]`);
       if(swatch) swatch.classList.add('selected');
       selectedParty=partyId;selectedLevel=level;
+      updateURLState();
     }
 
     function setupMap(){
@@ -253,9 +303,9 @@
           else{region.style.fill=null;region.removeAttribute('data-party');region.removeAttribute('data-level')} updateRegionList();updateLegend();updateURLState();
         });
         region.addEventListener('mouseenter',e=>{
-          const regionName=region.id.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+          const regionName=region.id.replace(/^_+/, '').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
           let parent=region.parentElement,groupName='';
-          while(parent && parent.tagName!=='svg'){if(parent.id && parent.id!=='regions'){groupName=parent.id.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());break} parent=parent.parentElement}
+          while(parent && parent.tagName!=='svg'){if(parent.id && parent.id!=='regions'){groupName=parent.id.replace(/^_+/, '').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());break} parent=parent.parentElement}
           tooltip.innerHTML=groupName?`<span style="font-weight:400">${groupName}</span> <span style="font-weight:700">${regionName}</span>`:regionName; tooltip.style.opacity=1;
         });
         region.addEventListener('mousemove',e=>{tooltip.style.left=`${e.pageX+10}px`;tooltip.style.top=`${e.pageY+10}px`});
@@ -269,7 +319,7 @@
       const used=parties.filter(p=>document.querySelector(`#regions [data-party="${p.id}"]`));
       const newIds=used.map(p=>p.id);
       existing.forEach(item=>{if(!newIds.includes(item.dataset.partyId)){item.style.transition='all .4s ease';item.style.height=item.offsetHeight+'px';item.style.opacity=1;item.style.marginBottom=getComputedStyle(item).marginBottom;requestAnimationFrame(()=>{item.style.height='0px';item.style.opacity='0';item.style.marginBottom='0';item.style.padding='0';setTimeout(()=>{item.parentElement&&item.remove()},400)})}});
-      used.forEach(p=>{let item=wrap.querySelector(`.legend-item[data-party-id="${p.id}"]`);const html=`<div style="padding-bottom:5px;font-weight:600;">${p.name}</div>${p.levels.map((c,i)=>`<div><span class='legend-color' style='background:${c}'></span>${100-(i+1)*10}`).join('')}`; if(item){if(item.innerHTML!==html){item.innerHTML=html}} else {item=document.createElement('div');item.className='legend-item';item.dataset.partyId=p.id;item.innerHTML=html;wrap.appendChild(item);requestAnimationFrame(()=>{item.style.transition='all .6s ease';item.style.height='0px';item.style.opacity='1';item.style.height=item.scrollHeight+'px';item.classList.add('visible')})}})
+      used.forEach(p=>{let item=wrap.querySelector(`.legend-item[data-party-id="${p.id}"]`);const html=`<div style="padding-bottom:5px;font-weight:600;">${p.isCustom?`커스텀 (${p.base.toUpperCase()})`:p.name}</div>${p.levels.map((c,i)=>`<div><span class='legend-color' style='background:${c}'></span>${100-(i+1)*10}`).join('')}`; if(item){if(item.innerHTML!==html){item.innerHTML=html}} else {item=document.createElement('div');item.className='legend-item';item.dataset.partyId=p.id;item.innerHTML=html;wrap.appendChild(item);requestAnimationFrame(()=>{item.style.transition='all .6s ease';item.style.height='0px';item.style.opacity='1';item.style.height=item.scrollHeight+'px';item.classList.add('visible')})}})
     }
 
     function setupRemoveButton(){
@@ -284,8 +334,8 @@
       const list=document.getElementById('uncolored-regions'); list.innerHTML='';
       const regions=document.querySelectorAll('#regions path:not(.cls-3), #regions polygon:not(.cls-3), #regions polyline:not(.cls-3), #regions rect:not(.cls-3)');
       regions.forEach(region=>{
-        const regionId=region.id; const regionName=regionId.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-        let parent=region.parentElement,groupName=''; while(parent && parent.tagName!=='svg'){ if(parent.id && parent.id!=='regions'){ groupName=parent.id.replace(/^_+/,'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()); break } parent=parent.parentElement }
+        const regionId=region.id; const regionName=regionId.replace(/^_+/, '').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+        let parent=region.parentElement,groupName=''; while(parent && parent.tagName!=='svg'){ if(parent.id && parent.id!=='regions'){ groupName=parent.id.replace(/^_+/, '').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()); break } parent=parent.parentElement }
         const displayName=groupName?`<span style='font-weight:400'>${groupName}</span> <span style='font-weight:700'>${regionName}</span>`:regionName;
         const color=region.getAttribute('data-party')?region.style.fill:'#b9b9b9'; const isColored=region.hasAttribute('data-party');
         const el=document.createElement('div'); el.style.display='inline-flex'; el.style.alignItems='center'; el.style.padding='6px 10px'; el.style.borderRadius='8px'; el.style.whiteSpace='nowrap'; el.style.marginRight='6px'; el.style.background='transparent'; el.style.border='1px dashed rgba(255,255,255,.09)'; el.style.color=isColored?'#9aa4cc':'#eaf0ff';
@@ -301,10 +351,12 @@
     document.getElementById('scroll-right').addEventListener('click',()=>toolbarEl.scrollBy({left:300,behavior:'smooth'}));
 
     function downloadSVGAsPNG(scale=2){
-      const svg=document.getElementById('map'); const clone=svg.cloneNode(true); const vb=svg.viewBox.baseVal; const w=vb.width, h=vb.height; clone.setAttribute('width',w); clone.setAttribute('height',h); const ser=new XMLSerializer(); const str=ser.serializeToString(clone); const blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'}); const url=URL.createObjectURL(blob); const img=new Image(); img.onload=function(){const can=document.createElement('canvas');can.width=w*scale;can.height=h*scale;const ctx=can.getContext('2d');ctx.setTransform(scale,0,0,scale,0,0);ctx.drawImage(img,0,0);can.toBlob(function(b){const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='download.png';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)},'image/png'); URL.revokeObjectURL(url)}; img.src=url
+      const svg=document.getElementById('map'); const clone=svg.cloneNode(true); const vb=svg.viewBox.baseVal; const w=vb.width, h=vb.height; clone.setAttribute('width',w); clone.setAttribute('height',h); const ser=new XMLSerializer(); const str=ser.serializeToString(clone); const blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'}); const url=URL.createObjectURL(blob); const img=new Image(); img.onload=function(){const can=document.createElement('canvas');can.width=w*scale;can.height=h*scale;const ctx=can.getContext('2d');ctx.setTransform(scale,0,0,scale,0,0);ctx.drawImage(img,0,0);can.toBlob(function(b){const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u; a.download='download.png';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)},'image/png'); URL.revokeObjectURL(url)}; img.src=url
     }
 
     const modeContainer=document.getElementById('innermap');
+
+    // Placeholder for modeContent; assumed to be provided elsewhere in your app
         const modeContent = {
   a: () => {
         return `  <defs>
@@ -1045,20 +1097,91 @@
   }
 };
     
+
     function updateMode(v){modeContainer.innerHTML=''; modeContainer.innerHTML=(modeContent[v]())}
 
+    /* -------------------- Custom Color: add/remove & persistence -------------------- */
+    function isValidHex(v){return /^#([0-9a-fA-F]{6})$/.test(v)}
+
+    function addCustomColor(hex, shouldRerender=true){
+      const color = hex.toLowerCase();
+      const id = `custom-${Date.now()}-${Math.floor(Math.random()*1e4)}`;
+      parties.push({ id, name:`커스텀`, base:color, levels:generateShades(color), isCustom:true });
+      if(shouldRerender){ renderSwatches(); bindSwatchSelection(); updateLegend(); updateURLState(); }
+    }
+
+    function removeCustomPalette(id){
+      const idx = parties.findIndex(p=>p.id===id);
+      if(idx===-1) return;
+      const removed = parties[idx];
+      parties.splice(idx,1);
+      // Clear regions colored with this palette
+      document.querySelectorAll(`#regions [data-party="${id}"]`).forEach(el=>{
+        el.style.fill=null; el.removeAttribute('data-party'); el.removeAttribute('data-level');
+      });
+      // Deselect if it was selected
+      if(selectedParty===id){ selectedParty=null; selectedLevel=null; }
+      renderSwatches(); updateLegend(); updateRegionList(); updateURLState();
+      // Optional toast
+      console.log('Removed custom palette', removed.base);
+    }
+
+    function bindCustomControls(){
+      const picker = document.getElementById('custom-picker');
+      const hexInp = document.getElementById('custom-hex');
+      const addBtn = document.getElementById('add-custom');
+      const clearBtn = document.getElementById('clear-custom');
+
+      const syncToHex = (val)=>{ hexInp.value = val.toLowerCase(); };
+      const syncToPicker = (val)=>{ if(isValidHex(val)) picker.value = val; };
+
+      picker.addEventListener('input', (e)=>{ syncToHex(e.target.value); });
+      hexInp.addEventListener('input', (e)=>{ let v=e.target.value; if(v[0] !== '#') v = '#' + v.replace(/#/g,''); if(v.length>7) v=v.slice(0,7); e.target.value=v; if(isValidHex(v)) syncToPicker(v); });
+
+      addBtn.addEventListener('click', ()=>{ addCustomColor(hexInp.value,true); });
+      clearBtn.addEventListener('click', ()=>{
+          const ids = parties.filter(p=>p.isCustom).map(p=>p.id);
+          ids.forEach(removeCustomPalette); // handles UI refresh inside
+      });
+    }
+
+    function bindSwatchSelection(){
+      // Keep selection highlight in sync after rerender
+      if(selectedParty!==null && selectedLevel!==null){
+        const swatch=document.querySelector(`.color-swatch[data-party="${selectedParty}"][data-index="${selectedLevel}"]`);
+        if(swatch) swatch.classList.add('selected');
+      }
+    }
+
+    // URL state includes: r=regions, s=selected swatch, d=mode, c=custom bases joined by '-'
     function updateURLState(){
       const colored=regionList.map((el,i)=>{const party=el.getAttribute('data-party'); const level=el.getAttribute('data-level'); if(party && level!==null){const pi=parties.findIndex(p=>p.id===party); return `${i.toString(36)}_${pi.toString(36)}_${parseInt(level).toString(36)}`} return null}).filter(Boolean);
       const encoded=btoa(colored.join('|'));
       const selectedParam=selectedParty!==null?btoa(`${parties.findIndex(p=>p.id===selectedParty).toString(36)}${selectedLevel.toString(36)}`):'';
       const modeVal=document.getElementById('mode-select').value;
-      const newUrl=`${location.pathname}?r=${encoded}${selectedParam?`&s=${selectedParam}`:''}&d=${modeVal}`; history.replaceState(null,'',newUrl)
+      const customBases = parties.filter(p=>p.isCustom).map(p=>p.base.slice(1)).join('-');
+      const newUrl=`${location.pathname}?r=${encoded}${selectedParam?`&s=${selectedParam}`:''}&d=${modeVal}${customBases?`&c=${customBases}`:''}`; history.replaceState(null,'',newUrl)
+      // Also mirror to localStorage (optional)
+      localStorage.setItem('lktn_custom_bases', customBases);
+    }
+
+    function getCustomsFromState(){
+      const params=new URLSearchParams(window.location.search);
+      let fromQuery = [];
+      const c=params.get('c'); if(c){ fromQuery = c.split('-').map(x=>`#${x}`).filter(isValidHex); }
+      // backup from localStorage if query empty
+      if(fromQuery.length===0){
+        const saved = localStorage.getItem('lktn_custom_bases');
+        if(saved) fromQuery = saved.split('-').map(x=>`#${x}`).filter(isValidHex);
+      }
+      return fromQuery;
     }
 
     function loadURLState(){
       const params=new URLSearchParams(window.location.search); const d=params.get('d'); if(d!==null){document.getElementById('mode-select').value=d}
-      const s=params.get('s'); if(s){try{const raw=atob(s); const pi=parseInt(raw[0],36); const lv=parseInt(raw[1],36); if(!isNaN(pi)&&!isNaN(lv)){selectSwatch(parties[pi].id,lv)}}catch(e){console.warn('Invalid swatch state')}}
-      const r=params.get('r'); if(r){try{const dec=atob(r).split('|'); dec.forEach(code=>{const [rc,pc,lc]=code.split('_'); const ri=parseInt(rc,36), pi=parseInt(pc,36), lv=parseInt(lc,36); const el=regionList[ri]; if(el && parties[pi] && parties[pi].levels[lv]){el.style.fill=parties[pi].levels[lv]; el.setAttribute('data-party',parties[pi].id); el.setAttribute('data-level',lv)}})}catch(e){console.warn('Failed to decode region state',e)}}
+      // customs must already be added in initSwatches()
+      const s=params.get('s'); if(s){try{const raw=atob(s); const pi=parseInt(raw[0],36); const lv=parseInt(raw[1],36); if(!isNaN(pi)&&!isNaN(lv)&& parties[pi]){selectSwatch(parties[pi].id,lv)}}catch(e){console.warn('Invalid swatch state')}}
+      const r=params.get('r'); if(r){try{const dec=atob(r).split('|').filter(Boolean); dec.forEach(code=>{const [rc,pc,lc]=code.split('_'); const ri=parseInt(rc,36), pi=parseInt(pc,36), lv=parseInt(lc,36); const el=regionList[ri]; if(el && parties[pi] && parties[pi].levels[lv]){el.style.fill=parties[pi].levels[lv]; el.setAttribute('data-party',parties[pi].id); el.setAttribute('data-level',lv)}})}catch(e){console.warn('Failed to decode region state',e)}}
     }
 
     document.getElementById('mode-select').addEventListener('change',e=>{updateURLState(); updateMode(e.target.value); setupMap(); updateLegend(); updateRegionList()});
@@ -1066,8 +1189,15 @@
     function maybeShowTutorial(){const shown=localStorage.getItem('lktn_tutorial_shown'); if(!shown){document.getElementById('tutorial-overlay').style.display='flex'} document.getElementById('tutorial-close').addEventListener('click',()=>{localStorage.setItem('lktn_tutorial_shown','true'); const ov=document.getElementById('tutorial-overlay'); ov.style.opacity='0'; setTimeout(()=>{ov.style.display='none'},500)})}
 
     // Init
-    loadURLState(); updateMode(document.getElementById('mode-select').value);
-    initSwatches(); setupMap(); updateLegend(); selectSwatch('party1',2); setupRemoveButton(); updateRegionList(); maybeShowTutorial(); loadURLState(); updateLegend(); updateRegionList();
+    updateMode(document.getElementById('mode-select').value);
+    initSwatches();
+    renderSwatches();
+    setupMap(); updateLegend(); setupRemoveButton(); updateRegionList();
+    bindCustomControls();
+    // Default select a built-in swatch for convenience
+    const defaultParty = builtInParties[0].id; selectSwatch(defaultParty,2);
+    // Load URL state afterwards
+    loadURLState(); updateLegend(); updateRegionList();
   </script>
 </body>
 </html>
