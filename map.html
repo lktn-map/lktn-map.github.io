@@ -1499,7 +1499,6 @@
 
     function loadURLState(){
       const params=new URLSearchParams(window.location.search); const d=params.get('d'); if(d!==null){document.getElementById('mode-select').value=d}
-      updateMode(document.getElementById('mode-select').value);
       // customs must already be added in initSwatches()
       const s=params.get('s'); if(s){try{const raw=atob(s); const pi=parseInt(raw[0],36); const lv=parseInt(raw[1],36); if(!isNaN(pi)&&!isNaN(lv)&& parties[pi]){selectSwatch(parties[pi].id,lv)}}catch(e){console.warn('Invalid swatch state')}}
       const r=params.get('r'); if(r){try{const dec=atob(r).split('|').filter(Boolean); dec.forEach(code=>{const [rc,pc,lc]=code.split('_'); const ri=parseInt(rc,36), pi=parseInt(pc,36), lv=parseInt(lc,36); const el=regionList[ri]; if(el && parties[pi] && parties[pi].levels[lv]){el.style.fill=parties[pi].levels[lv]; el.setAttribute('data-party',parties[pi].id); el.setAttribute('data-level',lv)}})}catch(e){console.warn('Failed to decode region state',e)}}
