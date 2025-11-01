@@ -1514,14 +1514,13 @@
 // 1. Setup base UI structure BUT DO NOT WRITE STATE YET
 initSwatches();
 renderSwatches();
-setupMap(); 
-updateLegend(); 
 setupRemoveButton(); 
-updateRegionList();
 bindCustomControls();
 
 // 2. Try to load state from the URL BEFORE selecting defaults
-loadURLState(); 
+loadURLState();
+updateMode(); 
+setupMap(); 
 updateLegend();
 updateRegionList();
 updateURLState();
