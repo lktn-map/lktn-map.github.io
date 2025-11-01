@@ -1519,7 +1519,7 @@ bindCustomControls();
 
 // 2. Try to load state from the URL BEFORE selecting defaults
 loadURLState();
-updateMode(); 
+updateMode(document.getElementById('mode-select').value); 
 setupMap(); 
 updateLegend();
 updateRegionList();
