@@ -1105,7 +1105,7 @@
         opacity: .5;
       }
 
-      .st1 {
+      .cls-3 {
         fill: #b9b9b9;
         stroke: #fff;
       }
@@ -1497,6 +1497,10 @@
       return fromQuery;
     }
 
+    function loadURLMode(){
+      const params=new URLSearchParams(window.location.search); const d=params.get('d'); if(d!==null){document.getElementById('mode-select').value=d}
+    }
+
     function loadURLState(){
       const params=new URLSearchParams(window.location.search); const d=params.get('d'); if(d!==null){document.getElementById('mode-select').value=d}
       // customs must already be added in initSwatches()
@@ -1518,7 +1522,7 @@ setupRemoveButton();
 bindCustomControls();
 
 // 2. Try to load state from the URL BEFORE selecting defaults
-loadURLState();
+loadURLMode();
 updateMode(document.getElementById('mode-select').value); 
 setupMap(); 
 updateLegend();
